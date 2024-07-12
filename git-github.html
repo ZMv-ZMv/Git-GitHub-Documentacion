@@ -7,6 +7,10 @@
 </head>
 <body>
 
+<h2>¿Qué es un repositorio?</h2>
+<div>
+    Es el lugar donde rastreamos cambios, administramos nuestros archivos, y compartimos información.
+</div>
     
 <h2>AREAS TRABAJO EN GIT</h2>
 <div>
@@ -170,7 +174,8 @@ checkout
         git checkout -b version-Python
     
     origin/main
-        Cambia al repositorio REMOTO origin y a su rama main pero para trabajar de manera local. En este caso se muestra un msg que se puede hacer cambios en local que no van a modificar la información en el remoto. Es muy útil ya que si se trabaja con VS Code, se puede ver los archivos en local con los cambios realizado en el retomo
+        Cambia al repositorio REMOTO origin y a su rama main pero para trabajar de manera local. En este caso se muestra un msg que se puede hacer cambios en local que no van a modificar la información en el remoto. Es muy útil ya que si se trabaja con VS Code, se puede los cambios realizados en el repositorio retomo pero en la máquina local.
+        Para que funcione adecuadamente, es necesario antes haber hecho un 'fetch' ya que sino la máquina local no sabrá qué cambios existen en el repositorio remoto, y si luego se necesita regresar a una rama local, main por ejemplo, se ejecuta el comando git switch main.
     
 merge
     para fusionar ramas. Se debe estar en la rama que recibirá la fusión. Notar que mientras se está haciendo la fusión, el mensaje de Git sobre la rama actual muestra también la palabra MERGING: (main|MERGING)
@@ -192,24 +197,39 @@ clone
     Pero ocurre algo al querer enviar los cambios de vuelta al repositorio remoto, en este caso solo hemos hecho una copia en local. Si intentamos hacer git push tendremos un error ya que no hemos definido ningún origen remoto para este directorio. Para guardar en forma remota (usando GitHub) debemos crear un repositorio, conectarlo a nuestra carpeta local con 'git remote add origin ruta' y de esa forma estaremos habilitados para guardar los cambios en remoto.
 
 remote
-    Verifica el nombre que se le ha asignado al repositorio remoto en GitHub para trabajar con Git. Éste no es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez. Normalmente casi siempre este nombre será 'origin'
+    Para ver los repositorios remotos que actualmente tienen conexión con la pc local o para establecer esa conexión con los repositorios remotos, estas conexiones se realiza a través de la URL del repositorio, y para no estar tecleando siempre esa URL se puede poner un nombre a esa conexión, normalmente la primera conxión en una sesión de trabajo se le suele llamar por convención 'origin', las siguientes conexiones con otros repositorios en la misma sesión de trabajo deberán tener otros nombres. También sirve para renombrar y eliminar conexiones con repositorios remotos.
+    Si se ha clonado un repositorio se debería ver al menos 'origin' que es el nombre que le da Git por defecto al servidor del que has clonado.
+    Verifica el nombre que se le ha asignado al repositorio remoto en GitHub para trabajar con Git. Éste NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
+    Una vez que se establece una conexión con un repositorio remoto, se puede utilizar por ejemplo el comando 'push' para subir nuestros cambios al repositorio remoto o 'pull' para bajar cambios a nuestra pc.
 
     -v
         muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
     
     add
-        visibiliza un repositorio remoto a gitbash para poder actualizar cambios. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es dar visibilidad a un repositorio remoto en gitbash, para ello hay que indicar la dirección o link del repositorio remoto. Después se puede utilizar -v
-        Ejemplo. Agregar a un repositorio remoto (normalmnente origin):
-        git remote add origin https://github.com/usuario/repositorio.git
+        Añade una conexión de un repositorio remoto al repositorio local para poder actualizar cambios u otras cosas. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es crear la conexión, para ello hay que indicar la dirección o link del repositorio remoto. La idea es añadir un repositorio y asociarlo a un nombre que luego se pueda referenciar fácilmente, normalmente este nombre es 'origin' para cuando se trabaja con un solo repositorio, pero si se desea agregar más, se debe utilizar otros nombres, luego puedes usar ese nombre en línea de comandos en lugar de la dirección URL entera.
+        Después de este comando se puede utilizar -v para ver las direcciones de estos remotos.
+        Ejemplo. Agregar un repositorio remoto de nombre 'origin':
+        git remote add origin https://github.com/usuario/.....git
+        Ejemplo. Agregar un repositorio remoto de nombre 'opcion2':
+        git remote add opcion2 https://github.com/usuario/.....git
+
+    rename <oldname> <newname>
+        para renombrar un repositorio remoto
+
+    remove <name>
+        para eliminar la conexion con un repositorio remoto.
 
 push
-    Envía los cambios realizados en un repositorio local a un repositorio remoto para que ambos tengan la misma información y estén sincronizados, creando una conexión entre el repositorio local y el remoto.
+    Envía los cambios realizados en un repositorio local a un repositorio remoto para que ambos tengan la misma información y estén sincronizados. Es necesario que exista una conexión entre el repositorio local y el remoto la cual se puede configurar o verificar con el comando 'remote'
     ¿push hace un commit???
     Ejemplo. Enviar datos desde un repositorio local a la rama main de un repositorio remoto:
     git push origin main
     Ejemplo. Enviar datos desde un repositorio local a la rama nueva-rama de un repositorio remoto:
     git push origin nueva-rama
     En este caso si la rama en remoto no existe, se crea automáticamente.
+
+    -u
+
 
 pull
     Descarga el contenido de un repositorio remoto e inmediatamente actualiza un repositorio local para que ambos tengan la misma información si no hay conflictos. A diferencia del comando fetch, pull combina los cambios automáticamente.
@@ -221,7 +241,14 @@ fetch
     Verifica si se han realizado cambios en el repositorio remoto desde la última vez que actualizaste tu respositorio local con git pull, sin combinar esos cambios con el repositorio local y nos permite ver como una vista previa de esos cambios y luego podemos elegir si queremos conbinarlos o no con el comando merge. Se diferencia del comando pull que sí combina los cambios.
     Ejemplo
     git fetch origin
+    Algo que es común hacer es que luego de hacer un fetch, hacer un git checkout origin/main
     
+
+switch
+    para cambiar de rama
+    faltaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
 
     -------------------------------------------------------------------------------
     *******************************************************************************
