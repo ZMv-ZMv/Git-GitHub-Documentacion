@@ -248,9 +248,10 @@ clone
 
 remote
     Para ver los repositorios remotos que actualmente tienen conexión con la pc local o para establecer esa conexión con los repositorios remotos, estas conexiones se realiza a través de la URL del repositorio, y para no estar tecleando siempre esa URL se puede poner un nombre a esa conexión, normalmente la primera conxión en una sesión de trabajo se le suele llamar por convención 'origin', las siguientes conexiones con otros repositorios en la misma sesión de trabajo deberán tener otros nombres. También sirve para renombrar y eliminar conexiones con repositorios remotos.
-    Si se ha clonado un repositorio se debería ver al menos 'origin' que es el nombre que le da Git por defecto al servidor del que has clonado.
-    Verifica el nombre que se le ha asignado al repositorio remoto en GitHub para trabajar con Git. Éste NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
+    Si se ha clonado un repositorio se debería ver al menos 'origin' que es el nombre que le da GitHub por defecto al servidor del que has clonado, además de la URL que GitHub le da al repositorio.
+    El nombre que se le da a una conexión NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
     Una vez que se establece una conexión con un repositorio remoto, se puede utilizar por ejemplo el comando 'push' para subir nuestros cambios al repositorio remoto o 'pull' para bajar cambios a nuestra pc.
+    Si no hay repositorios remotos configurados, este comando no mostrará nada.
 
     -v
         muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
@@ -392,17 +393,3 @@ rmdir
     -------------------------------------------------------------------------------
     *******************************************************************************
     -------------------------------------------------------------------------------
-
-<h2>Visual Studio Code</h2>
-<h3>Para ver los archivos ocultos en VS Code (carpetas .git por ejemplo).</h3>
-<div>
-    1. Ir a file > Preferences > Settings (o Ctrl + ,)
-    2. En la columna de la izquierda seleccionar: User > Commonly used > Text editor > Files
-    3. En el panel de la derecha buscar el item 'Exclude'
-    4. Posar el cursor sobre la opción que dice **/.git y hacia la derecha hacel clic en la X para eliminar este item. Se le está diciendo a VS Code que NO se quiere ocultar las carpetas '.git'
-    Con esto la carpeta .git debería aparecer en la lista de archivos/carpetas de VS Code disponibles para trabajar.
-</div>
-
-
-</body>
-</html>
