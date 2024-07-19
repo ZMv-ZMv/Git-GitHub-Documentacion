@@ -257,7 +257,7 @@ remote
         muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
     
     add
-        Añade una conexión de un repositorio remoto al repositorio local para poder actualizar cambios u otras cosas. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es crear la conexión, para ello hay que indicar la dirección o link del repositorio remoto. La idea es añadir un repositorio y asociarlo a un nombre que luego se pueda referenciar fácilmente, normalmente este nombre es 'origin' para cuando se trabaja con un solo repositorio, pero si se desea agregar más, se debe utilizar otros nombres, luego puedes usar ese nombre en línea de comandos en lugar de la dirección URL entera.
+        Añade una conexión de un repositorio remoto al repositorio local para poder actualizar cambios u otras cosas. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es crear la conexión, para ello hay que indicar un nombre para conexión y una dirección o link del repositorio remoto. La idea es añadir un repositorio y asociarlo a un nombre que luego se pueda referenciar fácilmente, normalmente este nombre es 'origin' por convención para cuando se trabaja con un solo repositorio, pero si se desea agregar más, se debe utilizar otros nombres, luego puedes usar ese nombre en línea de comandos en lugar de la dirección URL entera.
         Después de este comando se puede utilizar -v para ver las direcciones de estos remotos.
         Ejemplo. Agregar un repositorio remoto de nombre 'origin':
         $ git remote add origin https://github.com/usuario/.....git
@@ -290,9 +290,11 @@ pull
 
 fetch
     Verifica si se han realizado cambios en el repositorio remoto desde la última vez que actualizaste tu respositorio local con git pull, sin combinar esos cambios con el repositorio local y nos permite ver como una vista previa de esos cambios y luego podemos elegir si queremos conbinarlos o no con el comando merge. Se diferencia del comando pull que sí combina los cambios.
-    Ejemplo
-    $ git fetch origin
-    Algo que es común hacer es que luego de hacer un fetch, hacer un git checkout origin/main
+    Ejemplos:
+    $ git fetch 
+    $ git fetch origin <branch>
+    $ git fetch <remote> <branch>
+    Algo que es común hacer es que luego de hacer un fetch, hacer un git checkout origin/main para desde local en el repositorio remoto sin que los archivos del área de trabajo se vean modificados, esto se puede hacer en VS Code muy intuitivamente. 
     
 
 switch
