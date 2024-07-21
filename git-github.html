@@ -7,16 +7,25 @@
 </head>
 <body>
 
+<h2>¿Qué es Git</h2>
+<div>
+    Es un sistema de control de versiones que nos permite rastrear o administrar los cmabios que hemos hecho en un conjunto de archivos.
+</div>
+
 <h2>¿Qué es un repositorio?</h2>
 <div>
-    Es el lugar donde rastreamos cambios, administramos nuestros archivos, y compartimos información.
+    Es el lugar donde se almacenan archivos con sus distintas versiones, rastreamos y administramos sus cambios, y compartimos esa información con otros usuarios.
+    Un repositorio de acuerdo a su ubicación puede ser de dos formas:
+    1. Local. Se ubicará en nuestra pc (normalmente en la pc en el que se creó) y sólo nosotros podremos acceder a él.
+    2. Remoto. Se ubicará en la nube, en algún servidor como en GitHub por ejemplo, esto siginifica que podrá ser accesible por varios usuarios al mismo tiempo.
+    Un repositorio local puede ser enviado a un repositorio remoto y viceversa en cualquier momento. Esta sería la mejor forma de trabajar ya que permitirá que la información esté actualizada en todo momento en todos sitios.
 </div>
     
 <h2>AREAS TRABAJO EN GIT</h2>
 <div>
     Se refiere al estado en el que puede estar un archivo en git dentro del proceso de "llevar" ese archivo al repositorio. Son 3 áreas:
     
-    1. Directorio de trabajo (Working directory): carpeta del proyecto que contiene los archivos, carpetas y el directorio .git del repositorio. Estos componentes NO son parte del repositorio y NO se han añadido al área de preparación. Cuando un archivo se encuentra en esta área decimos que se encuentra en una verisón MODIFICADA (MODIFIED).
+    1. Directorio de trabajo (Working directory): carpeta del proyecto que contiene los archivos, carpetas y el directorio .git. Estos componentes NO son parte del repositorio y NO se han añadido al área de preparación. Cuando un archivo se encuentra en esta área decimos que se encuentra en una verisón MODIFICADA (MODIFIED).
     
     -> para pasar a la siguiente área usar el comando add
     
@@ -76,6 +85,11 @@ config
     --global
         para que las configuraciones que se hagan afecten a todo git. Se se omite, las configuraciones afectarán sólo al repositorio actual.
 
+    init.defaultBranch 
+        para definir el nombre por defecto de la rama principal cuando se crea un repositorio.
+        Ejemplo. Definir el nombre 'main':
+        $ git config --global init.defaultBranch main
+
     user.name "nombre"
         para configurar el nombre del ususario de git. Normalmebte debría ser el nombre del ususario de la cuenta de github ya que este nombre es el que aparecerá en los commits que este usuario suba. Si no se especifica el argumento nombre, devuelve el nombre actual. configurado.
 
@@ -108,10 +122,10 @@ init
         $ git config --global init.defaultBranch main
 
 status
-    Para verificar el estado del repositorio. Muestra la rama actual, los commits realizados, los componentes en el área de preparación etc. Tener en cuenta que este comando sólo nos muestra info de los repositorios locales. Si se actualiza un repositorio remoto, status no nos podrá decir si nuestros repositorio local está actualizado. Si se desea verificar el estado de nuestro repositorio local respecto al remoto utilizar el comando fetch y si se desea descargar y combinar lo que hay remoto con lo que hay en local utilizar el comando pull
+    Para verificar el estado del repositorio. Muestra la rama actual, los componentes en el área de preparación, los componentes no rastreados, etc. Tener en cuenta que este comando sólo nos muestra info de los repositorios locales. Si se actualiza un repositorio remoto, status no nos podrá decir si nuestros repositorio local está actualizado. Si se desea verificar el estado de nuestro repositorio local respecto al remoto utilizar el comando fetch y si se desea descargar y combinar lo que hay remoto con lo que hay en local utilizar el comando pull
 
 add
-    para agregar archivos desde el directorio de trabajo hacia el área de preparación. 
+    para agregar archivos desde el directorio de trabajo hacia el área de preparación, es decir, los pasará de una versión MODIFICADA a una versión PREPARADA.
     Ejemplo. Para agregar el archivo mi-archivo.txt al área de preparación:
     $ git add mi-archivo.txt
     Se puede obviar escribir el nombre de los archivos escribiendo un punto en lugar de los archivos. 
@@ -120,9 +134,10 @@ add
 
 rm
     --cached
-            para eliminar archivos del área de preparación. Estos archivos regresarán a ser parte del directorio de trabajo. 
+            para regresar archivos del área de preparación al área de trabajo. Estos archivos regresarán a ser parte del directorio de trabajo, es decir, el archivo volverá en una versión MODIFICADA, y el comando status lo mostrará como 'untracked'.
             Ejemplo. para remover el archivo mi-archivo.txt del área de preparación:
             $ git rm --cached mi-archivo.txt
+            rm 'mi-archivo.txt'
 
 commit
     Sube los cambios del área de preparación al repositorio. Ya debe haberse creado un repositorio con el comando init y tener archivos en el área de prepación generados con el comando add. Se puede incluir una descripción con el flag -m.
@@ -205,10 +220,14 @@ checkout
         Cambia al repositorio REMOTO origin y a su rama main pero para trabajar de manera local. En este caso se muestra un msg que se puede hacer cambios en local que no van a modificar la información en el remoto. Es muy útil ya que si se trabaja con VS Code, se puede los cambios realizados en el repositorio retomo pero en la máquina local.
         Para que funcione adecuadamente, es necesario antes haber hecho un 'fetch' ya que sino la máquina local no sabrá qué cambios existen en el repositorio remoto, y si luego se necesita regresar a una rama local, main por ejemplo, se ejecuta el comando git switch main.
 
-    <nombre de archivo>
-        se puede usar checkout con el nombre de un archivo para deshacer los cambios que se ha hecho en ese archivo. Esto revertirá la archivo a la versión HEAD.
+    <nombre de archivo> o . (punto)
+        Se puede usar checkout con el nombre de un archivo para deshacer los cambios que se ha hecho en ese archivo. Esto revertirá el archivo a la versión HEAD.
         Ejemplo. Eliminar (revertir) los cambios realizados desde el último commit en el archivo index.html
         $ git checkout index.html
+        Updated 1 path from index
+        Si se tiene varios archivos a los que se requiere deshacer los cambios, al igual que con el comando add, se puede usar un punto ( . ) en vez de los nombres de los archivos:
+        $ git checkout . 
+        Updated n paths from the index
 
     <hash>
         regresa a un commit anterior, para ello hay q indicar el hash del commit al que se desea regresar o parte del hash.
@@ -303,6 +322,13 @@ fetch
 switch
     para cambiar de rama
     faltaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+    -c 
+        para crear una nueva rama y cambiar hacia ella. Git muestra un mensaje sobre el cambio del HEAD hacia la nueva rama creada.
+        Ejemplo. Crear la nueva rama 'lanzamiento' y cambiar hacia ella:
+        $ git switch -c lanzamiento
+        Switched to a new branch 'lanzamiento'
+
 
 diff
     compara dos elementos para ver la diferencia. Se puede usar sobre archivos o ramas...
