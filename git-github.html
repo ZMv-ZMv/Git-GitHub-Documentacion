@@ -246,6 +246,8 @@ merge
     Ejemplo. Fusionar la rama "version-js" con la rama actual:
     $ git merge version-js
 
+    Cuando hay conflictos en una unión primero se deben resolver los conflictos, luego utilizar --continue, luego add para llevar los cambios a stage y luego un commit. Ese es el proceso para terminar con un merge con conflictos. Sino, se puede usar --abort para descartar el merge.
+
     --continue
         Cuando una fusión de ramas tiene conflictos, primero hay que solucionar esos conflictos y luego continuar el proceso de fusión con este comando. Cuamdo se ejecuta este comando los conflictos deben estar solucionados ya que serán subidos al repositorio como un nuevo commit, en VS Code se abre una pestaña nueva esperando confirmar el mensaje de descripción y cerrar el archivo para terminar con la fusión y el commit automático. Al terminar la fusión Git muestra un msg indicando lo correspondiente.
         En el siguiente texto se ha unido la rama 'version-js' a la rama main:
