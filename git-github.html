@@ -49,9 +49,26 @@
 <h2>¿Qué es una rama (branch)?</h2>
 <div>
     Es una línea independiente de desarrollo en el repositorio, que evolucionará paralelamente a la rama principal y que puede o no volver a unirse a ella, pudiendo tener versiones diferentes del mismo proyecto.
+    Internamente en Git, cuando se crea una rama sólo se está creado un puntero a un commit, no se cambia ningún otro aspecto en el repositorio.
     Para crear una rama o ver las que actualmente existen en el repositorio actual usar el comando branch.
+    Las ramas pueden también renombrarse, incluso la rama principal puede ser renombrada en cualquier momento.
     Para cambiar de rama actual usar el comando checkout.
     Para fusionar ramas usar el comando merge.
+</div>
+
+<h2>¿Qué es el HEAD?</h2>
+<div>
+    El término HEAD es una referencia a un commit, un puntero que apunta a un commit específico de una rama la cual actualmente se está viendo o trabajando, es decir, nos da referencia de en qué rama estamos trabajando actualmente.
+    Normalmente el HEAD apunta al último commit de la rama actual (en el que estamos trabajando), pero en cualquier momento podemos regresar a trabajar sobre un commit anterior levando el HEAD hacia ese commit, desde ese momento cualquier commit que creemos sobre el commit al que hemos regresado, deberá crearse sobre una rama nueva, ya que se supone que existe una rama que se ha estado desarrollando y está más avanzada (la rama desde la cual regresamo a un commit anterior) y esa rama no puede modificarse desde una rama anterior sin crear una nueva.
+    Para moverse entre ramas o commits para desplazar el HEAD, usar el comando checkout.
+
+</div>
+
+<h2>¿Qué es el Detached HEAD?</h2>
+<div>
+    Normalmente el HEAD lo tenemos ubicado sobre (apunta a) el último commit de una rama, pero habrá veces en las que se desea regresar a commits anteriores para ver el historial del desarrollo, en este caso el HEAD no apuntará al último commit de la rama, sino que estará ubicado en cualquier commit antecesor al que lo hayamos desplazado, a esta situación se le denomina 'Detached HEAD'. Detached por que aunque estamos actualmente sobre un commit, éste al no ser último de la rama, no puede sufrir cambios, a menos que en ese momento creemos una rama nueva para guardar esos cambios. En caso de que hagamos cambios y no creemos esa nueva rama, los cambios no serán permanentes y se eliminarán tan pronto cambiemos el HEAD de posición.
+    Para cambiar de posición el HEAD a un commit anterior o a otra rama, utilizar el comando checkout.
+    El hecho de mover el HEAD hacia un commit antecesor (hacerle Detached HEAD), NO significa que se va a deshacer lo avanzado, no se modificará nada, es sólo que se está cambiando de posición el HEAD, simplemente se está explorando un commit antecesor.
 </div>
 
 <h2>BIFURCAR UN REPOSITORIO (Fork)</h2>
@@ -176,11 +193,13 @@ reset
 
 branch
     Para crear ramas nuevas en el repositorio o ver las que actualmente existen, borrar ramas.
-    Ejemplo. Crear una rama con el nombre version-JavaScript:
-    $ git branch version-JavaScript
-    Ejemplo. Para ver (listar) las rammas que actualmente existe:
+    Ejemplo. Para ver (listar) las rammas que actualmente existen:
     $ git branch
     La rama en la que se está trabajando (actual) tiene un * al inicio
+    Ejemplo. Crear una rama con el nombre version-JavaScript:
+    $ git branch version-JavaScript
+    Luego será necesario cambiar el HEAD hacia esa rama para trabajar sobre ella.
+    ¿La rama version-JavaScript será creada sobre el último commit? ¿Qué pasa con los posibles avances o cambios que se hayan hecho luego del último commit?
     
     -m
         para cambiar el nombre de una rama. hay 2 formas de cambiar el nombre a una rama:
@@ -192,7 +211,7 @@ branch
         $ git branch -m version-JavaScript version-js
 
     -d
-        Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, se debe borrar desde otra rama.
+        Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, debemos estar en otra rama para poder borrarla.
         Ejemplo. Borrar la rama "version-py":
         $ git branch -d version-py
     
@@ -207,13 +226,18 @@ branch
         Este comando es muy importante dado que si se desea ser parte de un proyecto, el chequeo de las ramas siempre debe ser el primer paso.
 
 checkout
-    para cambiar de rama actual (puede ser una versión remota incluso), o regresar a una  versión de commit anterior, o para crear una nueva rama y cambiar a esa rama como actual, o para revertir los cambios de un archivo 
-    Cuando se ejecuta este comando, Git muestra el mensaje: Switched to branch ... indicando el cambio a la rama indicada.
+    para cambiar de rama actual (puede ser una versión remota incluso), o regresar a una  versión de commit anterior, o para crear una nueva rama y cambiar a esa rama como actual, o para revertir los cambios de un archivo ...
+    checkout puede operar sobre archivos, commits y ramas.
+    Para cambiar de rama (funcionaría igual que el comando switch) sólo hay que indicar el nombre de la rama
     Ejemplo. Cambiar a la rama version-JavaScript:
     $ git checkout version-JavaScript
+    Cuando se ejecuta este comando, Git muestra el mensaje: Switched to branch ... indicando el cambio a la rama indicada.
+    Para cambiar de commit sólo hay que indicar el hash del commit en cuestión
+    Ejmplo. Cambiar al commit cd1aff7
+    $ git checkout cd1aff7
     
     -b 
-        crea una rama nueva rama nueva.
+        crea una rama nueva y mover el HEAD hacia esa nueva rama.
         Ejemplo. Crear y cambiar a una rama llamada version-Python
         $ git checkout -b version-Python
     
@@ -234,7 +258,7 @@ checkout
         regresa a un commit anterior, para ello hay q indicar el hash del commit al que se desea regresar o parte del hash.
         Ejemplo. Ir al commit con el hash cd5f8b9:
         $ git checkout cd5f8b9
-        En este momento, git informa de la situación en la que ha entrado: estarás desconectado del estado de HEAD, por lo tanto, podrás hacer los cambios que quieras sin que haya problema con las ramas anteriormente establecidas en el git checkout. Ahora, si en este momento quieres deshacer los cambios que has realizado, podrás utilizar la instrucción git switch – y, si quieres guardar los cambios que hayas hecho, puedes introducir la instrucción git switch -c <new-branch-name>. 
+        En este momento, git informa de la situación en la que se ha entrado (en modo detached HEAD, es decir, el HEAD no está apuntando al último commit de una rama), por lo tanto, podrás hacer los cambios que quieras sin que haya problema con las ramas anteriormente establecidas en el git checkout. Ahora, si en este momento quieres deshacer los cambios que has realizado, podrás utilizar la instrucción git switch – y, si quieres guardar los cambios que hayas hecho, puedes introducir la instrucción git switch -c <new-branch-name>. 
         Notar que con este comando, si hay cambios que NO se han agregado a un repositorio, estos cambios pueden perderse (pueden ser sobreesctitos por el checkout). Git informa de esta situación en vez de ejecutar el comando. El mensaje que muestra es como este:
         $ git checkout cd5f8b9 
         error: Your local changes to the following files would be overwritten by checkout:
@@ -242,10 +266,31 @@ checkout
         Please commit your changes or stash them before you switch branches.
         Aborting
         Será necesario entonces realizar un commit para que todos nuestros cambios estén seguros
+
+restore        
+        devuelve un archivo al estado de un commit previo el cual puede ser el más reciente o algun otro, también sirve para remover archivos del área de preparación.
+        IMPORTANTE: En el caso de ejecutar este comando desde el último commit de una rama y además se tiene avanzado cambios sobre ese último commit (que obviamente no se han comiteado) se perderán definitivamente estos últimos cambios y peor aún, los efectos de este comando no se pueden deshacer ya que los cambios, se supone, nunca han sido comiteados por tanto no han sido versionados ni guardados, por tanto se perderán definitivamente.
+        Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit:
+        $ git restore myfile
+        ¿en este caso funciona como el comando checkout?
+        Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. Para restaurar un archivo a un commit antecesor al actual se debe espeficar el número de commits hacia atrás desde el HEAD actual. 
+        Ejemplo. Restaurar el archivo 'file.txt' hacia 3 commits previos al presente HEAD:
+        $ git restore --source HEAD~3 file.txt
+        Este comando también sirve para remover archivos del área de preparación.
+        Ejemplo. Remover el archivo file.txt del área de stage:
+        $ git restore --stage file.txt
+
 merge
     para fusionar ramas. Se debe estar en la rama que recibirá la fusión. Notar que mientras se está haciendo la fusión, el mensaje de Git sobre la rama actual muestra también la palabra MERGING: (main|MERGING)
     Ejemplo. Fusionar la rama "version-js" con la rama actual:
     $ git merge version-js
+
+    ¿Qué es fast-forward merge?
+    Es la forma más simple de fusionar ramas, se produce cuando por ejemplo sobre la rama main, se ha creado otra rama por ejemplo llamada 'version02', se ha avanzado algunos commits sobre esta última rama mientras que no se ha avanzado nada sobre la rama main, en este caso una fusión con la rama main será muy simple ya que la fusión sólo se trata de acutalizar la main con los commits avanzados en la rama 'version02'. En estos casos git nos indica con un mensaje este tipo de merge que estamos realizando, por ejemplo nos mostraría un mensaje así:
+    Updating 9cd41ce..f0f439c
+    Fast-forward
+    myfile.txt | 4 +++-
+    1 file changed, 3 insertions(+), 1 deletion(-)
 
     Cuando hay conflictos en una unión primero se deben resolver los conflictos, luego utilizar --continue, luego add para llevar los cambios a stage y luego un commit. Ese es el proceso para terminar con un merge con conflictos. Sino, se puede usar --abort para descartar el merge.
 
@@ -323,8 +368,7 @@ fetch
     
 
 switch
-    para cambiar de rama
-    faltaaaaaaaaaaaaaaaaaaaaaaaaaa
+    para cambiar el HEAD a otra rama, básicamente cambiar de rama de trabajo.
 
     -c 
         para crear una nueva rama y cambiar hacia ella. Git muestra un mensaje sobre el cambio del HEAD hacia la nueva rama creada.
@@ -334,7 +378,10 @@ switch
 
 
 diff
-    compara dos elementos para ver la diferencia. Se puede usar sobre archivos o ramas...
+    compara dos elementos para ver la diferencia. Se puede usar sobre archivos o ramas, también muestra la diferencia entre los cambios que se han realizado desde el último commit.
+    Ejemplo. Ver la diferencia entre el último commit y lo avanzado desde ahi:
+    $ gid diff
+    aquí git muestra información sobre las diferencias...
     Ejemplo. Suponiendo que se está en la rama 'main', compararla con la rama 'login'
     $ git diff login
 
