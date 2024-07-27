@@ -127,6 +127,8 @@ config
         $ git l1
         Ejemplo. Crear un alias para status --short:
         $ git config --global alias.ss "status --short"
+        Ejemplo. Crear un alias para checkout main
+        $ git config --global alias.cm "checkout main"
     </div>
 
 init
@@ -270,6 +272,11 @@ checkout
     Para cambiar de commit sólo hay que indicar el hash del commit en cuestión
     Ejmplo. Cambiar al commit cd1aff7
     $ git checkout cd1aff7
+    Si se desea regresar un número específico de commits desde el HEAD o desde una rama (el último commit de ella) se debe indicar la cantidad de commits precedido del símbolo ~
+    Ejemplo. Regresar 2 commits desde el HEAD:
+    $ git checkout HEAD~2
+    Ejemplo. Regresar 3 commits desde la rama 'desarrollo' (desde el último commit de esta rama):
+    $ git checkout desarrollo~3
     
     -b
         crea una rama nueva y mover el HEAD hacia esa nueva rama.
@@ -437,11 +444,18 @@ tag
 
 stash
     <div>
-    almacena temporalmente los cambios de una rama para poder cambiar a otra sin hacer commits.
+    almacena temporalmente los cambios de una rama para poder cambiar a otra rama, trabajar en esta última y luego poder regresar al stash y seguir trabajando sobre ese estado. stash guarda temporalmente el estado de los archivos sin hacer commits. stash es últil en situaciones en que se está trabajando en una rama digamos 'rama-trabajo' se ha avanzado cambios ahí y se desea cambiar temporalmente a otra rama, a main por ejemplo, para hacer algo rápido o pequeño, terminar eso y regresar a la rama 'rama-trabajo' para seguir trabajando donde se dejo el avance, sin hacer ningún commit en 'rama-trabajo' durante todo este proceso. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas usando el flag apply.
+    Por defecto, Git no guarda en el stash los cambios hechos en archivos que no se les está haciendo reastreo (archivos untracked) o archivos ignorados (con .ignore).
+
     list
         para ver lo que se tiene en los stash. Se muestra todos los stash con información almacenada. Si no hay información en stash, este comando no devuelve nada.
     pop
-        recupera lo que hay almacenado en el stash para seguir trabajando normalmente.
+        recupera lo que hay almacenado en el stash para seguir trabajando normalmente y elimina lo que hay en el stash (elimina el stash) de modo que ya no se puede volver a referenciar.
+
+    apply
+        recupera lo que hay almacenado en el stash para seguir trabajando normalmente pero NO elimina lo que hay en el stash (no elimina el stash), pudiendo volver a tener opción de recuperar en otro momento lo que hay en el stash. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas.
+        Sería como una versión más segura de pop ya que no elimina la info.
+
     drop
         elimina la información del stash sin recuperarla.
     </div>
