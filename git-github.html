@@ -98,313 +98,331 @@ COMANDOS GIT
 se debe escribir git antes de cada comando
 
 config
-    para la configuración de git.
-
-    --global
-        para que las configuraciones que se hagan afecten a todo git. Se se omite, las configuraciones afectarán sólo al repositorio actual.
-
-    init.defaultBranch 
-        para definir el nombre por defecto de la rama principal cuando se crea un repositorio.
-        Ejemplo. Definir el nombre 'main':
-        $ git config --global init.defaultBranch main
-
-    user.name "nombre"
-        para configurar el nombre del ususario de git. Normalmebte debría ser el nombre del ususario de la cuenta de github ya que este nombre es el que aparecerá en los commits que este usuario suba. Si no se especifica el argumento nombre, devuelve el nombre actual. configurado.
-
-    user.email "correo"
-        para configurar el correo del usuario de git. Normalmente debería ser el correo del usuario de la cuenta de github ya que este correo es el que aparecerá en los commits que este usuario suba. Si no se especifica el argumento correo, devuelve el correo actual.
-    
-    core.editor
-        para asociar un editor (IDE) con Git.
-        Ejemplo. Asociar Visual Studio Code con Git:
-        $ git config --global core.editor "code --wait"
-        --wait le dice a Git que espere hasta que el archivo se guarde, y se cierre para culminar con el commit
-
-    alias 
-        para poner nombres a secuencias de comandos, algo similar a una macro. Luego para ejecutar esa macro solo hay que introducir el nombre del nuevo alias.
-        Ejemplo 1: crear un alias de nombre 'macro'
-        $ git config --global alias.macro "log --graph --decorate --all --oneline"
-        $ git macro
-        Ejemplo 2: crear un alias de nombre 'l1' que sirve para mostrar todos los logs en una sola línea:
-        $ git config --global alias.l1 "log --all --oneline"
-        $ git l1
-
-        Este alias se guarda en el archivo .gitconfig dentro de la carpta de usuario del sistema.
+    <div>
+        para la configuración de git.
+        --global
+            para que las configuraciones que se hagan afecten a todo git. Se se omite, las configuraciones afectarán sólo al repositorio actual.
+        init.defaultBranch
+            para definir el nombre por defecto de la rama principal cuando se crea un repositorio.
+            Ejemplo. Definir el nombre 'main':
+            $ git config --global init.defaultBranch main
+        user.name "nombre"
+            para configurar el nombre del ususario de git. Normalmebte debría ser el nombre del ususario de la cuenta de github ya que este nombre es el que aparecerá en los commits que este usuario suba. Si no se especifica el argumento nombre, devuelve el nombre actual. configurado.
+        user.email "correo"
+            para configurar el correo del usuario de git. Normalmente debería ser el correo del usuario de la cuenta de github ya que este correo es el que aparecerá en los commits que este usuario suba. Si no se especifica el argumento correo, devuelve el correo actual.
+        
+        core.editor
+            para asociar un editor (IDE) con Git.
+            Ejemplo. Asociar Visual Studio Code con Git:
+            $ git config --global core.editor "code --wait"
+            --wait le dice a Git que espere hasta que el archivo se guarde, y se cierre para culminar con el commit
+        alias
+            para poner nombres a secuencias de comandos, algo similar a una macro. Luego para ejecutar esa macro solo hay que introducir el nombre del nuevo alias.
+            Ejemplo 1: crear un alias de nombre 'macro'
+            $ git config --global alias.macro "log --graph --decorate --all --oneline"
+            $ git macro
+            Ejemplo 2: crear un alias de nombre 'l1' que sirve para mostrar todos los logs en una sola línea:
+            $ git config --global alias.l1 "log --all --oneline"
+            $ git l1
+            Este alias se guarda en el archivo .gitconfig dentro de la carpta de usuario del sistema.
+    </div>
 
 init
-    (Initialize) Inicializa un repositorio git vacío ¿local? en la carpeta actual. Crea la carpeta .git en la que se encuentra toda la info del repositorio. Si se borra esta carpeta el respositorio no existirá.
-
-    .defaultBranch "nombre"
-        cambia la denominación (no el nombre) de un repositorio o de todos los repositorios futuros, se decir, el nombre por defecto.
-        Ejemplo. para cambiar la denominación por defecto de los respositorios futuros a "main":
-        $ git config --global init.defaultBranch main
+    <div>
+        (Initialize) Inicializa un repositorio git vacío ¿local? en la carpeta actual. Crea la carpeta .git en la que se encuentra toda la info del repositorio. Si se borra esta carpeta el respositorio no existirá.
+        .defaultBranch "nombre"
+            cambia la denominación (no el nombre) de un repositorio o de todos los repositorios futuros, se decir, el nombre por defecto.
+            Ejemplo. para cambiar la denominación por defecto de los respositorios futuros a "main":
+            $ git config --global init.defaultBranch main
+    </div>
 
 status
-    Para verificar el estado del repositorio. Muestra la rama actual, los componentes en el área de preparación, los componentes no rastreados, etc. Tener en cuenta que este comando sólo nos muestra info de los repositorios locales. Si se actualiza un repositorio remoto, status no nos podrá decir si nuestros repositorio local está actualizado. Si se desea verificar el estado de nuestro repositorio local respecto al remoto utilizar el comando fetch y si se desea descargar y combinar lo que hay remoto con lo que hay en local utilizar el comando pull
+    <div>
+        Para verificar el estado del repositorio. Muestra la rama actual, los componentes en el área de preparación, los componentes no rastreados, etc. Tener en cuenta que este comando sólo nos muestra info de los repositorios locales. Si se actualiza un repositorio remoto, status no nos podrá decir si nuestros repositorio local está actualizado. Si se desea verificar el estado de nuestro repositorio local respecto al remoto utilizar el comando fetch y si se desea descargar y combinar lo que hay remoto con lo que hay en local utilizar el comando pull
+    </div>
 
 add
-    para agregar archivos desde el directorio de trabajo hacia el área de preparación, es decir, los pasará de una versión MODIFICADA a una versión PREPARADA.
-    Ejemplo. Para agregar el archivo mi-archivo.txt al área de preparación:
-    $ git add mi-archivo.txt
-    Se puede obviar escribir el nombre de los archivos escribiendo un punto en lugar de los archivos. 
-    Ejemplo. Agregar los arhchivos modificados cualesquiera q sean al stage:
-    $ git add .
+    <div>
+        para agregar archivos desde el directorio de trabajo hacia el área de preparación, es decir, los pasará de una versión MODIFICADA a una versión PREPARADA.
+        Ejemplo. Para agregar el archivo mi-archivo.txt al área de preparación:
+        $ git add mi-archivo.txt
+        Se puede obviar escribir el nombre de los archivos escribiendo un punto en lugar de los archivos.
+        Ejemplo. Agregar los arhchivos modificados cualesquiera q sean al stage:
+        $ git add .
+    </div>
 
 rm
-    --cached
-            para regresar archivos del área de preparación al área de trabajo. Estos archivos regresarán a ser parte del directorio de trabajo, es decir, el archivo volverá en una versión MODIFICADA, y el comando status lo mostrará como 'untracked'.
-            Ejemplo. para remover el archivo mi-archivo.txt del área de preparación:
-            $ git rm --cached mi-archivo.txt
-            rm 'mi-archivo.txt'
+    <div>
+        --cached
+                para regresar archivos del área de preparación al área de trabajo. Estos archivos regresarán a ser parte del directorio de trabajo, es decir, el archivo volverá en una versión MODIFICADA, y el comando status lo mostrará como 'untracked'.
+                Ejemplo. para remover el archivo mi-archivo.txt del área de preparación:
+                $ git rm --cached mi-archivo.txt
+                rm 'mi-archivo.txt'
+    </div>
 
 commit
-    Sube los cambios del área de preparación al repositorio. Ya debe haberse creado un repositorio con el comando init y tener archivos en el área de prepación generados con el comando add. Se puede incluir una descripción con el flag -m.
-    Ejemplo. Crea un commit con la descripción de que se está agregando el archivo mi-archivo.txt:
-    $ git commit -m "Agregar archivo: mi-archivo.txt"
-    Lo ideal es trabajar en conjunto con visual studio code para trabajar la descripción de manera más interactiva y no con el flag -m. Para hacer esto sólo hay que ejecutar este comando sin argumentos ni flags: git commit y enter, esto hará que se abra VS Code con un archivo y esperará a que se guarde y se cierre para terminar con el commit. Para crear commits dentro de una rama sólo hay que estar en ella.
-    
-    --amend
-        para modificar un commit. Hay que tener mucho cuidado con editar commits ya que ya podría haber sido descargado por otro usuario antes de hacer la modificación. Lo recomendable es hacer estas modificaciones en local. --amend espera a que se cierre el archivo de mensaje (en le editor) para terminar con la edición del commit.
-
-    -m 
-        para indicar el mensaje del commit. Tiene que ser sí o sí una única línea.
+    <div>
+        Sube los cambios del área de preparación al repositorio. Ya debe haberse creado un repositorio con el comando init y tener archivos en el área de prepación generados con el comando add. Se puede incluir una descripción con el flag -m.
+        Ejemplo. Crea un commit con la descripción de que se está agregando el archivo mi-archivo.txt:
+        $ git commit -m "Agregar archivo: mi-archivo.txt"
+        Lo ideal es trabajar en conjunto con visual studio code para trabajar la descripción de manera más interactiva y no con el flag -m. Para hacer esto sólo hay que ejecutar este comando sin argumentos ni flags: git commit y enter, esto hará que se abra VS Code con un archivo y esperará a que se guarde y se cierre para terminar con el commit. Para crear commits dentro de una rama sólo hay que estar en ella.
+        
+        --amend
+            para modificar un commit. Hay que tener mucho cuidado con editar commits ya que ya podría haber sido descargado por otro usuario antes de hacer la modificación. Lo recomendable es hacer estas modificaciones en local. --amend espera a que se cierre el archivo de mensaje (en le editor) para terminar con la edición del commit.
+        -m
+            para indicar el mensaje del commit. Tiene que ser sí o sí una única línea.
+    </div>
 
 log
-    Muestra el historial de commits realizados con su respectiva información descriptiva (SHA, rama, autor, correo, fecha, descripción)
+    <div>
+        Muestra el historial de commits realizados con su respectiva información descriptiva (SHA, rama, autor, correo, fecha, descripción)
+        --oneline
+            para mostrar el historial de commits cada uno en una linea.
+        -p
+            para ver las diferencias entre los commits. no entiendo bien los mensajes en este modo !!!!!!!!!!
+        --graph
+            muestra el log de commits con 'lineas' simulando la secuencia gráfica de los commits.
+        
+    </div>
 
-    --oneline
-        para mostrar el historial de commits cada uno en una linea.
-
-    -p
-        para ver las diferencias entre los commits. no entiendo bien los mensajes en este modo !!!!!!!!!!
-
-    --graph
-        muestra el log de commits con 'lineas' simulando la secuencia gráfica de los commits.
-    
 reflog
-    
+    <div>
+        para ver el registro de todo
+    </div>
+
 reset
-    para dehacer un commit (eliminarlo). 
-    Ejemplo. Para eliminar el último commit:
-    $ git reset --soft HEAD~1
-    --soft : los archivos en el directorio de trabajo nose ven afectado por la eliminación del commit, quedan tal cual están antes de eliminar el commit, quedarían en el working area. En Visual Studio quedarían marcados con la letra M en señal de que están modificados, ya que esa es su situación real
-    ahora, el commit que los actualizó en el repositorio ya no existe por tanto son cambios pendientes de agregar al stage y luego al repositorio como si fueran archivos que nunca se subieron.
-    HEAD~1 : deshace un cambio desde el HEAD (desde lo último commit subido)
+    <div>
+        para dehacer un commit (eliminarlo).
+        Ejemplo. Para eliminar el último commit:
+        $ git reset --soft HEAD~1
+        --soft : los archivos en el directorio de trabajo nose ven afectado por la eliminación del commit, quedan tal cual están antes de eliminar el commit, quedarían en el working area, es decir, es el commit lo que desaparece, los archivos y sus cambios permanecen intactos. En Visual Studio quedarían marcados con la letra M en señal de que están modificados, ya que esa es su situación real
+        ahora, el commit que los actualizó en el repositorio ya no existe por tanto son cambios pendientes de agregar al stage y luego al repositorio como si fueran archivos que nunca se subieron. Este flag no es necesario indicarlo ya que es el comportamiento por defecto. Una sitaución donde se utilizaría este comando con --soft es cuando se ha realizado un commit en una rama equivocada, en este caso se necesita mantener lo avanzado en los archivos, pero no el commit, por lo que el reset tendría sentido.
+        Si se desea eliminar también los archivos tanto como los commits se debe reemplazar este flag por el flag --hard. Tener en cuenta que esta acción es irrevocable.
+        HEAD~1 : deshace un cambio desde el HEAD (desde lo último commit subido)3
+        Tener en cuenta que este comando puede crear commits huérfanos ya que si por ejemplo retrocedo 5 commits y existe una rama creada 3 commits atrás, esta rama no tendrá ahora un commit de inicio, no se le podrá identificar de donde vino, lo cual es problemático. Es por este motivo que este comando reset debe utilizarse con mucho cuidado o cuando se está trabajando con una sola rama o cuando se sabe bien lo que hace y las implicancias del los resultados. Un comando mucho más seguro en estos casos sería 'revert'.
+    </div>
 
 branch
-    Para crear ramas nuevas en el repositorio o ver las que actualmente existen, borrar ramas.
-    Ejemplo. Para ver (listar) las rammas que actualmente existen:
-    $ git branch
-    La rama en la que se está trabajando (actual) tiene un * al inicio
-    Ejemplo. Crear una rama con el nombre version-JavaScript:
-    $ git branch version-JavaScript
-    Luego será necesario cambiar el HEAD hacia esa rama para trabajar sobre ella.
-    ¿La rama version-JavaScript será creada sobre el último commit? ¿Qué pasa con los posibles avances o cambios que se hayan hecho luego del último commit?
-    
-    -m
-        para cambiar el nombre de una rama. hay 2 formas de cambiar el nombre a una rama:
-        1° Indicando sólo el nuevo nombre. De esta forma necesario que la rama a la que se desea cambiar nombre sea la rama actual.
-        Ejemplo. Cambiar de nombre a la rama actual a "version-js":
-        $ git branch -m version-js
-        2° Indicando el nombre antiguo y el nuevo nombre de la rama a cambiar. De esta forma no es necesario estar en la rama a la que renombrar.
-        Ejemplo. Cambiar el nombre de la rama "version-JavaScript" a "version-js":
-        $ git branch -m version-JavaScript version-js
-
-    -d
-        Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, debemos estar en otra rama para poder borrarla.
-        Ejemplo. Borrar la rama "version-py":
-        $ git branch -d version-py
-    
-    -a 
-        visualiza todas las ramas disponibles en el repositorio incluidas las ramas remotas las cuales empiezan con 'remotes/origin' para denotar su estado remoto e indicar su presencia en un serivdor remoto:
-        $ git branch -a
-        * main
-        remotes/origin/HEAD -> origin/main
-        remotes/origin/feature-x
-        remotes/origin/feature-y
-        remotes/origin/release-1.0
-        Este comando es muy importante dado que si se desea ser parte de un proyecto, el chequeo de las ramas siempre debe ser el primer paso.
+    <div>
+        Para crear ramas nuevas en el repositorio o ver las que actualmente existen, borrar ramas.
+        Ejemplo. Para ver (listar) las rammas que actualmente existen:
+        $ git branch
+        La rama en la que se está trabajando (actual) tiene un * al inicio
+        Ejemplo. Crear una rama con el nombre version-JavaScript:
+        $ git branch version-JavaScript
+        Luego será necesario cambiar el HEAD hacia esa rama para trabajar sobre ella.
+        ¿La rama version-JavaScript será creada sobre el último commit? ¿Qué pasa con los posibles avances o cambios que se hayan hecho luego del último commit?
+        
+        -m
+            para cambiar el nombre de una rama. hay 2 formas de cambiar el nombre a una rama:
+            1° Indicando sólo el nuevo nombre. De esta forma necesario que la rama a la que se desea cambiar nombre sea la rama actual.
+            Ejemplo. Cambiar de nombre a la rama actual a "version-js":
+            $ git branch -m version-js
+            2° Indicando el nombre antiguo y el nuevo nombre de la rama a cambiar. De esta forma no es necesario estar en la rama a la que renombrar.
+            Ejemplo. Cambiar el nombre de la rama "version-JavaScript" a "version-js":
+            $ git branch -m version-JavaScript version-js
+        -d
+            Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, debemos estar en otra rama para poder borrarla.
+            Ejemplo. Borrar la rama "version-py":
+            $ git branch -d version-py
+        
+        -a
+            visualiza todas las ramas disponibles en el repositorio incluidas las ramas remotas las cuales empiezan con 'remotes/origin' para denotar su estado remoto e indicar su presencia en un serivdor remoto:
+            $ git branch -a
+            * main
+            remotes/origin/HEAD -> origin/main
+            remotes/origin/feature-x
+            remotes/origin/feature-y
+            remotes/origin/release-1.0
+            Este comando es muy importante dado que si se desea ser parte de un proyecto, el chequeo de las ramas siempre debe ser el primer paso.
+    </div>
 
 checkout
-    para cambiar de rama actual (puede ser una versión remota incluso), o regresar a una  versión de commit anterior, o para crear una nueva rama y cambiar a esa rama como actual, o para revertir los cambios de un archivo ...
-    checkout puede operar sobre archivos, commits y ramas.
-    Para cambiar de rama (funcionaría igual que el comando switch) sólo hay que indicar el nombre de la rama
-    Ejemplo. Cambiar a la rama version-JavaScript:
-    $ git checkout version-JavaScript
-    Cuando se ejecuta este comando, Git muestra el mensaje: Switched to branch ... indicando el cambio a la rama indicada.
-    Para cambiar de commit sólo hay que indicar el hash del commit en cuestión
-    Ejmplo. Cambiar al commit cd1aff7
-    $ git checkout cd1aff7
-    
-    -b 
-        crea una rama nueva y mover el HEAD hacia esa nueva rama.
-        Ejemplo. Crear y cambiar a una rama llamada version-Python
-        $ git checkout -b version-Python
-    
-    origin/main
-        Cambia al repositorio REMOTO origin y a su rama main pero para trabajar de manera local. En este caso se muestra un msg que se puede hacer cambios en local que no van a modificar la información en el remoto. Es muy útil ya que si se trabaja con VS Code, se puede los cambios realizados en el repositorio retomo pero en la máquina local.
-        Para que funcione adecuadamente, es necesario antes haber hecho un 'fetch' ya que sino la máquina local no sabrá qué cambios existen en el repositorio remoto, y si luego se necesita regresar a una rama local, main por ejemplo, se ejecuta el comando git switch main.
-
-    <nombre de archivo> o . (punto)
-        Se puede usar checkout con el nombre de un archivo para deshacer los cambios que se ha hecho en ese archivo. Esto revertirá el archivo a la versión HEAD.
-        Ejemplo. Eliminar (revertir) los cambios realizados desde el último commit en el archivo index.html
-        $ git checkout index.html
-        Updated 1 path from index
-        Si se tiene varios archivos a los que se requiere deshacer los cambios, al igual que con el comando add, se puede usar un punto ( . ) en vez de los nombres de los archivos:
-        $ git checkout . 
-        Updated n paths from the index
-
-    <hash>
-        regresa a un commit anterior, para ello hay q indicar el hash del commit al que se desea regresar o parte del hash.
-        Ejemplo. Ir al commit con el hash cd5f8b9:
-        $ git checkout cd5f8b9
-        En este momento, git informa de la situación en la que se ha entrado (en modo detached HEAD, es decir, el HEAD no está apuntando al último commit de una rama), por lo tanto, podrás hacer los cambios que quieras sin que haya problema con las ramas anteriormente establecidas en el git checkout. Ahora, si en este momento quieres deshacer los cambios que has realizado, podrás utilizar la instrucción git switch – y, si quieres guardar los cambios que hayas hecho, puedes introducir la instrucción git switch -c <new-branch-name>. 
-        Notar que con este comando, si hay cambios que NO se han agregado a un repositorio, estos cambios pueden perderse (pueden ser sobreesctitos por el checkout). Git informa de esta situación en vez de ejecutar el comando. El mensaje que muestra es como este:
-        $ git checkout cd5f8b9 
-        error: Your local changes to the following files would be overwritten by checkout:
-            index.html
-        Please commit your changes or stash them before you switch branches.
-        Aborting
-        Será necesario entonces realizar un commit para que todos nuestros cambios estén seguros
+    <div>
+        para cambiar de rama actual (puede ser una versión remota incluso), o regresar a una  versión de commit anterior, o para crear una nueva rama y cambiar a esa rama como actual, o para revertir los cambios de un archivo ...
+        checkout puede operar sobre archivos, commits y ramas.
+        Para cambiar de rama (funcionaría igual que el comando switch) sólo hay que indicar el nombre de la rama
+        Ejemplo. Cambiar a la rama version-JavaScript:
+        $ git checkout version-JavaScript
+        Cuando se ejecuta este comando, Git muestra el mensaje: Switched to branch ... indicando el cambio a la rama indicada.
+        Para cambiar de commit sólo hay que indicar el hash del commit en cuestión
+        Ejmplo. Cambiar al commit cd1aff7
+        $ git checkout cd1aff7
+        
+        -b
+            crea una rama nueva y mover el HEAD hacia esa nueva rama.
+            Ejemplo. Crear y cambiar a una rama llamada version-Python
+            $ git checkout -b version-Python
+        
+        origin/main
+            Cambia al repositorio REMOTO origin y a su rama main pero para trabajar de manera local. En este caso se muestra un msg que se puede hacer cambios en local que no van a modificar la información en el remoto. Es muy útil ya que si se trabaja con VS Code, se puede los cambios realizados en el repositorio retomo pero en la máquina local.
+            Para que funcione adecuadamente, es necesario antes haber hecho un 'fetch' ya que sino la máquina local no sabrá qué cambios existen en el repositorio remoto, y si luego se necesita regresar a una rama local, main por ejemplo, se ejecuta el comando git switch main.
+        <nombre de archivo> o . (punto)
+            Se puede usar checkout con el nombre de un archivo para deshacer los cambios que se ha hecho en ese archivo. Esto revertirá el archivo a la versión HEAD.
+            Ejemplo. Eliminar (revertir) los cambios realizados desde el último commit en el archivo index.html
+            $ git checkout index.html
+            Updated 1 path from index
+            Si se tiene varios archivos a los que se requiere deshacer los cambios, al igual que con el comando add, se puede usar un punto ( . ) en vez de los nombres de los archivos:
+            $ git checkout .
+            Updated n paths from the index
+        <hash>
+            regresa a un commit anterior, para ello hay q indicar el hash del commit al que se desea regresar o parte del hash.
+            Ejemplo. Ir al commit con el hash cd5f8b9:
+            $ git checkout cd5f8b9
+            En este momento, git informa de la situación en la que se ha entrado (en modo detached HEAD, es decir, el HEAD no está apuntando al último commit de una rama), por lo tanto, podrás hacer los cambios que quieras sin que haya problema con las ramas anteriormente establecidas en el git checkout. Ahora, si en este momento quieres deshacer los cambios que has realizado, podrás utilizar la instrucción git switch – y, si quieres guardar los cambios que hayas hecho, puedes introducir la instrucción git switch -c <new-branch-name>.
+            Notar que con este comando, si hay cambios que NO se han agregado a un repositorio, estos cambios pueden perderse (pueden ser sobreesctitos por el checkout). Git informa de esta situación en vez de ejecutar el comando. El mensaje que muestra es como este:
+            $ git checkout cd5f8b9
+            error: Your local changes to the following files would be overwritten by checkout:
+                index.html
+            Please commit your changes or stash them before you switch branches.
+            Aborting
+            Será necesario entonces realizar un commit para que todos nuestros cambios estén seguros
+    </div>
 
 restore        
+    <div>
         devuelve un archivo al estado de un commit previo el cual puede ser el más reciente o algun otro, también sirve para remover archivos del área de preparación.
         IMPORTANTE: En el caso de ejecutar este comando desde el último commit de una rama y además se tiene avanzado cambios sobre ese último commit (que obviamente no se han comiteado) se perderán definitivamente estos últimos cambios y peor aún, los efectos de este comando no se pueden deshacer ya que los cambios, se supone, nunca han sido comiteados por tanto no han sido versionados ni guardados, por tanto se perderán definitivamente.
         Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit:
         $ git restore myfile
         ¿en este caso funciona como el comando checkout?
-        Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. Para restaurar un archivo a un commit antecesor al actual se debe espeficar el número de commits hacia atrás desde el HEAD actual. 
+        Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. Para restaurar un archivo a un commit antecesor al actual se debe espeficar el número de commits hacia atrás desde el HEAD actual, el commit actual no cuenta (sería como el 0), se empieza a contar 1 desde el commit anterior. Si en ese momento se desea regresar a la versión del HEAD hay que indicar 0 como número de commits hacia atrás.
         Ejemplo. Restaurar el archivo 'file.txt' hacia 3 commits previos al presente HEAD:
         $ git restore --source HEAD~3 file.txt
+        Ejemplo. Restaurar a la versión del HEAD (commit 0) el archivo file.txt
+        & git restore --source HEAD~0 file.txt
         Este comando también sirve para remover archivos del área de preparación.
         Ejemplo. Remover el archivo file.txt del área de stage:
-        $ git restore --stage file.txt
+        $ git restore --staged file.txt
+        Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
+    </div>
 
 merge
-    para fusionar ramas. Se debe estar en la rama que recibirá la fusión. Notar que mientras se está haciendo la fusión, el mensaje de Git sobre la rama actual muestra también la palabra MERGING: (main|MERGING)
-    Ejemplo. Fusionar la rama "version-js" con la rama actual:
-    $ git merge version-js
-
-    ¿Qué es fast-forward merge?
-    Es la forma más simple de fusionar ramas, se produce cuando por ejemplo sobre la rama main, se ha creado otra rama por ejemplo llamada 'version02', se ha avanzado algunos commits sobre esta última rama mientras que no se ha avanzado nada sobre la rama main, en este caso una fusión con la rama main será muy simple ya que la fusión sólo se trata de acutalizar la main con los commits avanzados en la rama 'version02'. En estos casos git nos indica con un mensaje este tipo de merge que estamos realizando, por ejemplo nos mostraría un mensaje así:
-    Updating 9cd41ce..f0f439c
-    Fast-forward
-    myfile.txt | 4 +++-
-    1 file changed, 3 insertions(+), 1 deletion(-)
-
-    Cuando hay conflictos en una unión primero se deben resolver los conflictos, luego utilizar --continue, luego add para llevar los cambios a stage y luego un commit. Ese es el proceso para terminar con un merge con conflictos. Sino, se puede usar --abort para descartar el merge.
-
-    --continue
-        Cuando una fusión de ramas tiene conflictos, primero hay que solucionar esos conflictos y luego continuar el proceso de fusión con este comando. Cuamdo se ejecuta este comando los conflictos deben estar solucionados ya que serán subidos al repositorio como un nuevo commit, en VS Code se abre una pestaña nueva esperando confirmar el mensaje de descripción y cerrar el archivo para terminar con la fusión y el commit automático. Al terminar la fusión Git muestra un msg indicando lo correspondiente.
-        En el siguiente texto se ha unido la rama 'version-js' a la rama main:
-        HP@HPV MINGW64 ~/ruta-reposistorio (main|MERGING)
-        $ git merge --continue
-        [main 34fd113] Merge branch 'version-js'
-    
-    --abort
-        resetea la sitaución del merge, devolviendo a estao previo antes del merge / pull
+    <div>
+        para fusionar ramas. Se debe estar en la rama que recibirá la fusión. Notar que mientras se está haciendo la fusión, el mensaje de Git sobre la rama actual muestra también la palabra MERGING: (main|MERGING)
+        Ejemplo. Fusionar la rama "version-js" con la rama actual:
+        $ git merge version-js
+        ¿Qué es fast-forward merge?
+        Es la forma más simple de fusionar ramas, se produce cuando por ejemplo sobre la rama main, se ha creado otra rama por ejemplo llamada 'version02', se ha avanzado algunos commits sobre esta última rama mientras que no se ha avanzado nada sobre la rama main, en este caso una fusión con la rama main será muy simple ya que la fusión sólo se trata de acutalizar la main con los commits avanzados en la rama 'version02'. En estos casos git nos indica con un mensaje este tipo de merge que estamos realizando, por ejemplo nos mostraría un mensaje así:
+        Updating 9cd41ce..f0f439c
+        Fast-forward
+        myfile.txt | 4 +++-
+        1 file changed, 3 insertions(+), 1 deletion(-)
+        Cuando hay conflictos en una unión primero se deben resolver los conflictos, luego utilizar --continue, luego add para llevar los cambios a stage y luego un commit. Ese es el proceso para terminar con un merge con conflictos. Sino, se puede usar --abort para descartar el merge.
+        --continue
+            Cuando una fusión de ramas tiene conflictos, primero hay que solucionar esos conflictos y luego continuar el proceso de fusión con este comando. Cuamdo se ejecuta este comando los conflictos deben estar solucionados ya que serán subidos al repositorio como un nuevo commit, en VS Code se abre una pestaña nueva esperando confirmar el mensaje de descripción y cerrar el archivo para terminar con la fusión y el commit automático. Al terminar la fusión Git muestra un msg indicando lo correspondiente.
+            En el siguiente texto se ha unido la rama 'version-js' a la rama main:
+            HP@HPV MINGW64 ~/ruta-reposistorio (main|MERGING)
+            $ git merge --continue
+            [main 34fd113] Merge branch 'version-js'
+        
+        --abort
+            resetea la sitaución del merge, devolviendo a estao previo antes del merge / pull
+    </div>
 
 clone   
-    Crea una copia local de un repositorio remoto. Este repositorio remoto está alojado en GitHub y ahí hay que obtener la dirección HTTPS de clonación del repositorio para agregarla como argumento a este comando. Hay que tener en cuenta que git crea el repositorio en la carpeta que actualmente se está trabajando, por tanto ante de ejecutar este comando hay que asegurarse estar en la carpeta adecuada. Git mostrará unos mensajes del proceso indicando que el proceso ha sido realizado al 100%
-    Ejemplo. Clonar el repositorio de GitHub 'nuevo-proyecto':
-    $ git clone https://github.com/usuario/nuevo-proyecto.git
-    En este caso la dirección htts ha sido obtenida del repositorio en la web de GitHub.
-    Pero ocurre algo al querer enviar los cambios de vuelta al repositorio remoto, en este caso solo hemos hecho una copia en local. Si intentamos hacer git push tendremos un error ya que no hemos definido ningún origen remoto para este directorio. Para guardar en forma remota (usando GitHub) debemos crear un repositorio, conectarlo a nuestra carpeta local con 'git remote add origin ruta' y de esa forma estaremos habilitados para guardar los cambios en remoto.
-    Notar que 'clone' sólo hace un clon de la rama principal del repositorio remoto y el resto de ramas no se clonan al local. 
-    Para clonar un repositorio con todas sus ramas: 
-        https://www.baeldung.com/ops/git-clone-remote-branches
-        https://www.geeksforgeeks.org/how-to-clone-all-remote-branches-in-git/
-    Para ver las ramas remotas (que existen en el repositorio remoto en GitHub) ejecutar 'git branch -a'.
+    <div>
+        Crea una copia local de un repositorio remoto. Este repositorio remoto está alojado en GitHub y ahí hay que obtener la dirección HTTPS de clonación del repositorio para agregarla como argumento a este comando. Hay que tener en cuenta que git crea el repositorio en la carpeta que actualmente se está trabajando, por tanto ante de ejecutar este comando hay que asegurarse estar en la carpeta adecuada. Git mostrará unos mensajes del proceso indicando que el proceso ha sido realizado al 100%
+        Ejemplo. Clonar el repositorio de GitHub 'nuevo-proyecto':
+        $ git clone https://github.com/usuario/nuevo-proyecto.git
+        En este caso la dirección htts ha sido obtenida del repositorio en la web de GitHub.
+        Pero ocurre algo al querer enviar los cambios de vuelta al repositorio remoto, en este caso solo hemos hecho una copia en local. Si intentamos hacer git push tendremos un error ya que no hemos definido ningún origen remoto para este directorio. Para guardar en forma remota (usando GitHub) debemos crear un repositorio, conectarlo a nuestra carpeta local con 'git remote add origin ruta' y de esa forma estaremos habilitados para guardar los cambios en remoto.
+        Notar que 'clone' sólo hace un clon de la rama principal del repositorio remoto y el resto de ramas no se clonan al local.
+        Para clonar un repositorio con todas sus ramas:
+            https://www.baeldung.com/ops/git-clone-remote-branches
+            https://www.geeksforgeeks.org/how-to-clone-all-remote-branches-in-git/
+        Para ver las ramas remotas (que existen en el repositorio remoto en GitHub) ejecutar 'git branch -a'.
+    </div>
 
 remote
-    Para ver los repositorios remotos que actualmente tienen conexión con la pc local o para establecer esa conexión con los repositorios remotos, estas conexiones se realiza a través de la URL del repositorio, y para no estar tecleando siempre esa URL se puede poner un nombre a esa conexión, normalmente la primera conxión en una sesión de trabajo se le suele llamar por convención 'origin', las siguientes conexiones con otros repositorios en la misma sesión de trabajo deberán tener otros nombres. También sirve para renombrar y eliminar conexiones con repositorios remotos.
-    Si se ha clonado un repositorio se debería ver al menos 'origin' que es el nombre que le da GitHub por defecto al servidor del que has clonado, además de la URL que GitHub le da al repositorio.
-    El nombre que se le da a una conexión NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
-    Una vez que se establece una conexión con un repositorio remoto, se puede utilizar por ejemplo el comando 'push' para subir nuestros cambios al repositorio remoto o 'pull' para bajar cambios a nuestra pc.
-    Si no hay repositorios remotos configurados, este comando no mostrará nada.
-
-    -v
-        muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
-    
-    add
-        Añade una conexión de un repositorio remoto al repositorio local para poder actualizar cambios u otras cosas. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es crear la conexión, para ello hay que indicar un nombre para conexión y una dirección o link del repositorio remoto. La idea es añadir un repositorio y asociarlo a un nombre que luego se pueda referenciar fácilmente, normalmente este nombre es 'origin' por convención para cuando se trabaja con un solo repositorio, pero si se desea agregar más, se debe utilizar otros nombres, luego puedes usar ese nombre en línea de comandos en lugar de la dirección URL entera.
-        Después de este comando se puede utilizar -v para ver las direcciones de estos remotos.
-        Ejemplo. Agregar un repositorio remoto de nombre 'origin':
-        $ git remote add origin https://github.com/usuario/.....git
-        Ejemplo. Agregar un repositorio remoto de nombre 'opcion2':
-        $ git remote add opcion2 https://github.com/usuario/.....git
-
-    rename <oldname> <newname>
-        para renombrar un repositorio remoto
-
-    remove <name>
-        para eliminar la conexion con un repositorio remoto.
+    <div>
+        Para ver los repositorios remotos que actualmente tienen conexión con la pc local o para establecer esa conexión con los repositorios remotos, estas conexiones se realiza a través de la URL del repositorio, y para no estar tecleando siempre esa URL se puede poner un nombre a esa conexión, normalmente la primera conxión en una sesión de trabajo se le suele llamar por convención 'origin', las siguientes conexiones con otros repositorios en la misma sesión de trabajo deberán tener otros nombres. También sirve para renombrar y eliminar conexiones con repositorios remotos.
+        Si se ha clonado un repositorio se debería ver al menos 'origin' que es el nombre que le da GitHub por defecto al servidor del que has clonado, además de la URL que GitHub le da al repositorio.
+        El nombre que se le da a una conexión NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
+        Una vez que se establece una conexión con un repositorio remoto, se puede utilizar por ejemplo el comando 'push' para subir nuestros cambios al repositorio remoto o 'pull' para bajar cambios a nuestra pc.
+        Si no hay repositorios remotos configurados, este comando no mostrará nada.
+        -v
+            muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
+        
+        add
+            Añade una conexión de un repositorio remoto al repositorio local para poder actualizar cambios u otras cosas. Este comando no crea commits ni sube archivos ni hace nada de ello, Lo único que hace es crear la conexión, para ello hay que indicar un nombre para conexión y una dirección o link del repositorio remoto. La idea es añadir un repositorio y asociarlo a un nombre que luego se pueda referenciar fácilmente, normalmente este nombre es 'origin' por convención para cuando se trabaja con un solo repositorio, pero si se desea agregar más, se debe utilizar otros nombres, luego puedes usar ese nombre en línea de comandos en lugar de la dirección URL entera.
+            Después de este comando se puede utilizar -v para ver las direcciones de estos remotos.
+            Ejemplo. Agregar un repositorio remoto de nombre 'origin':
+            $ git remote add origin https://github.com/usuario/.....git
+            Ejemplo. Agregar un repositorio remoto de nombre 'opcion2':
+            $ git remote add opcion2 https://github.com/usuario/.....git
+        rename <oldname> <newname>
+            para renombrar un repositorio remoto
+        remove <name>
+            para eliminar la conexion con un repositorio remoto.
+    </div>
 
 push
-    Envía los cambios realizados en un repositorio local a un repositorio remoto para que ambos tengan la misma información y estén sincronizados. Es necesario que exista una conexión entre el repositorio local y el remoto la cual se puede configurar o verificar con el comando 'remote'
-    ¿push hace un commit???
-    Ejemplo. Enviar datos desde un repositorio local a la rama main de un repositorio remoto:
-    $ git push origin main
-    Ejemplo. Enviar datos desde un repositorio local a la rama nueva-rama de un repositorio remoto:
-    $ git push origin nueva-rama
-    En este caso si la rama en remoto no existe, se crea automáticamente.
-
-    -u
-
+    <div>
+        Envía los cambios realizados en un repositorio local a un repositorio remoto para que ambos tengan la misma información y estén sincronizados. Es necesario que exista una conexión entre el repositorio local y el remoto la cual se puede configurar o verificar con el comando 'remote'
+        ¿push hace un commit???
+        Ejemplo. Enviar datos desde un repositorio local a la rama main de un repositorio remoto:
+        $ git push origin main
+        Ejemplo. Enviar datos desde un repositorio local a la rama nueva-rama de un repositorio remoto:
+        $ git push origin nueva-rama
+        En este caso si la rama en remoto no existe, se crea automáticamente.
+        -u
+    </div>
 
 pull
-    Descarga el contenido de un repositorio remoto e inmediatamente actualiza un repositorio local para que ambos tengan la misma información si no hay conflictos. A diferencia del comando fetch, pull combina los cambios automáticamente.
-    Si no hay cambios en el remoto, este comando no hace nada. No es necesario luego usar otro comando como fetch. Lo que si puede ser necesario es utiliar el comando log para ver los nuevos commits traídos a local
-    Ejemplo. Para actualizar un repositorio local desde uno remoto origni (verificar este nombre con git remote -v) hacia nuestra rama main:
-    $ git pull origin main
+    <div>
+        Descarga el contenido de un repositorio remoto e inmediatamente actualiza un repositorio local para que ambos tengan la misma información si no hay conflictos. A diferencia del comando fetch, pull combina los cambios automáticamente.
+        Si no hay cambios en el remoto, este comando no hace nada. No es necesario luego usar otro comando como fetch. Lo que si puede ser necesario es utiliar el comando log para ver los nuevos commits traídos a local
+        Ejemplo. Para actualizar un repositorio local desde uno remoto origni (verificar este nombre con git remote -v) hacia nuestra rama main:
+        $ git pull origin main
+    </div>
 
 fetch
-    Verifica si se han realizado cambios en el repositorio remoto desde la última vez que actualizaste tu respositorio local con git pull, sin combinar esos cambios con el repositorio local y nos permite ver como una vista previa de esos cambios y luego podemos elegir si queremos conbinarlos o no con el comando merge. Se diferencia del comando pull que sí combina los cambios.
-    Ejemplos:
-    $ git fetch 
-    $ git fetch origin <branch>
-    $ git fetch <remote> <branch>
-    Algo que es común hacer es que luego de hacer un fetch, hacer un git checkout origin/main para desde local en el repositorio remoto sin que los archivos del área de trabajo se vean modificados, esto se puede hacer en VS Code muy intuitivamente. 
-    
+    <div>
+        Verifica si se han realizado cambios en el repositorio remoto desde la última vez que actualizaste tu respositorio local con git pull, sin combinar esos cambios con el repositorio local y nos permite ver como una vista previa de esos cambios y luego podemos elegir si queremos conbinarlos o no con el comando merge. Se diferencia del comando pull que sí combina los cambios.
+        Ejemplos:
+        $ git fetch
+        $ git fetch origin <branch>
+        $ git fetch <remote> <branch>
+        Algo que es común hacer es que luego de hacer un fetch, hacer un git checkout origin/main para desde local en el repositorio remoto sin que los archivos del área de trabajo se vean modificados, esto se puede hacer en VS Code muy intuitivamente.
+        
+    </div>
 
 switch
-    para cambiar el HEAD a otra rama, básicamente cambiar de rama de trabajo.
-
-    -c 
-        para crear una nueva rama y cambiar hacia ella. Git muestra un mensaje sobre el cambio del HEAD hacia la nueva rama creada.
-        Ejemplo. Crear la nueva rama 'lanzamiento' y cambiar hacia ella:
-        $ git switch -c lanzamiento
-        Switched to a new branch 'lanzamiento'
-
+    <div>
+        para cambiar el HEAD a otra rama, básicamente cambiar de rama de trabajo.
+        -c
+            para crear una nueva rama y cambiar hacia ella. Git muestra un mensaje sobre el cambio del HEAD hacia la nueva rama creada.
+            Ejemplo. Crear la nueva rama 'lanzamiento' y cambiar hacia ella:
+            $ git switch -c lanzamiento
+            Switched to a new branch 'lanzamiento'
+    </div>
 
 diff
-    compara dos elementos para ver la diferencia. Se puede usar sobre archivos o ramas, también muestra la diferencia entre los cambios que se han realizado desde el último commit.
-    Ejemplo. Ver la diferencia entre el último commit y lo avanzado desde ahi:
-    $ gid diff
-    aquí git muestra información sobre las diferencias...
-    Ejemplo. Suponiendo que se está en la rama 'main', compararla con la rama 'login'
-    $ git diff login
+    <div>
+        compara dos elementos para ver la diferencia. Se puede usar sobre archivos o ramas, también muestra la diferencia entre los cambios que se han realizado desde el último commit.
+        Ejemplo. Ver la diferencia entre el último commit y lo avanzado desde ahi:
+        $ gid diff
+        aquí git muestra información sobre las diferencias...
+        Ejemplo. Suponiendo que se está en la rama 'main', compararla con la rama 'login'
+        $ git diff login
+    </div>
 
 tag
-
+    <div>
+        
+    </div>
 
 stash
-    almacena temporalmente los cambios de una rama para poder cambiar a otra sin hacer commits. 
-
-    list
-        para ver lo que se tiene en los stash. Se muestra todos los stash con información almacenada. Si no hay información en stash, este comando no devuelve nada.
-
-    pop
-        recupera lo que hay almacenado en el stash para seguir trabajando normalmente.
-
-    drop
-        elimina la información del stash sin recuperarla.
-
-reflog
-    para ver el registro de todo
-
-
-
+    <div>
+        almacena temporalmente los cambios de una rama para poder cambiar a otra sin hacer commits.
+        list
+            para ver lo que se tiene en los stash. Se muestra todos los stash con información almacenada. Si no hay información en stash, este comando no devuelve nada.
+        pop
+            recupera lo que hay almacenado en el stash para seguir trabajando normalmente.
+        drop
+            elimina la información del stash sin recuperarla.
+    </div>
 
     -------------------------------------------------------------------------------
     *******************************************************************************
