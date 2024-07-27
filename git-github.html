@@ -118,13 +118,15 @@ config
         --wait le dice a Git que espere hasta que el archivo se guarde, y se cierre para culminar con el commit
     alias
         para poner nombres a secuencias de comandos, algo similar a una macro. Luego para ejecutar esa macro solo hay que introducir el nombre del nuevo alias.
+        Este alias se guarda en el archivo .gitconfig dentro de la carpta de usuario del sistema.
         Ejemplo 1: crear un alias de nombre 'macro'
         $ git config --global alias.macro "log --graph --decorate --all --oneline"
         $ git macro
         Ejemplo 2: crear un alias de nombre 'l1' que sirve para mostrar todos los logs en una sola línea:
         $ git config --global alias.l1 "log --all --oneline"
         $ git l1
-        Este alias se guarda en el archivo .gitconfig dentro de la carpta de usuario del sistema.
+        Ejemplo. Crear un alias para status --short:
+        $ git config --global alias.ss "status --short"
     </div>
 
 init
