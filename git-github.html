@@ -213,7 +213,7 @@ reset
     --soft : los archivos en el directorio de trabajo nose ven afectado por la eliminación del commit, quedan tal cual están antes de eliminar el commit, quedarían en el working area, es decir, es el commit lo que desaparece, los archivos y sus cambios permanecen intactos. En Visual Studio quedarían marcados con la letra M en señal de que están modificados, ya que esa es su situación real
     ahora, el commit que los actualizó en el repositorio ya no existe por tanto son cambios pendientes de agregar al stage y luego al repositorio como si fueran archivos que nunca se subieron. Este flag no es necesario indicarlo ya que es el comportamiento por defecto. Una sitaución donde se utilizaría este comando con --soft es cuando se ha realizado un commit en una rama equivocada, en este caso se necesita mantener lo avanzado en los archivos, pero no el commit, por lo que el reset tendría sentido.
     Si se desea eliminar también los archivos tanto como los commits se debe reemplazar este flag por el flag --hard. Tener en cuenta que esta acción es irrevocable.
-    HEAD~1 : deshace un cambio desde el HEAD (desde lo último commit subido)3
+    HEAD~1 : deshace un cambio desde el HEAD (desde lo último commit subido)
     Tener en cuenta que este comando puede crear commits huérfanos ya que si por ejemplo retrocedo 5 commits y existe una rama creada 3 commits atrás, esta rama no tendrá ahora un commit de inicio, no se le podrá identificar de donde vino, lo cual es problemático. Es por este motivo que este comando reset debe utilizarse con mucho cuidado o cuando se está trabajando con una sola rama o cuando se sabe bien lo que hace y las implicancias del los resultados. Un comando mucho más seguro en estos casos sería 'revert'.
     </div>
 
