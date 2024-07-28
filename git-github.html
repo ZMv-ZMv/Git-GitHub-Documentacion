@@ -186,6 +186,15 @@ commit
 
     -a
         evita usar el comando add, lo que hace que se pueda realizar un commit sin estar mandando archivos al stage explicitamente ya que este flag lo hace automáticamente. No debería utilizarse este flag en commits complejos ya que podria incluir resultados inesperados.
+
+    --allow-empty
+        permite realizar commits sin cambios en los archivos. Sería como hacer un commit vacío.
+        El funcionamiento normal de git no permite que se hagan commits sin cambios en los archivos, es decir, si se trata de realizar un commit 'vacío' git mostrará un mensaje alertando de esta situación y no realiza el commit, con este flag se puede saltar esta advertencia y realizar el commit.
+        Ejemplo. Realizar un commit vacío con mensaje 'empty commit'
+        $ git commit --allow-empty -m "empty commit"
+
+    --allow-empty-message
+        permite crear commits sin mensaje.
     </div>
 
 log
@@ -501,6 +510,27 @@ stash
     ## BIFURCAR (FORK) UN REPOSITORIO
     hay que ir al repositorio que se le quiere hacer el fork y hacer clic en el botón 'fork' listo. El repositorio se bifurcado en tu cuenta de GitHub.
     
+    ## PARA COMBINAR 2 REPOSITORIOS
+    Fuente: https://gist.github.com/msrose/2feacb303035d11d2d05
+
+    ## PARA ELIMINAR UNO O VARIOS COMMITS PREVIOS
+    fuente: https://adictosaltrabajo.com/2023/01/05/como-eliminar-commits-de-la-rama-master/
+    Si lo que se desea es eliminar una cantidad X de commits exactamente previos al actual (HEAD), utilizar el comando reset, es simple. Pero si se desea eliminar algún(os) commit(s) que están más atrás en el historial sin tocar los que exactamente preceden al actual se debe seguir los siguientes pasos:
+    1.  Se desea eliminar los commits del 2 al 4. Obtener la lista de hash de los commits con git log --oneline. Obtendríamos algo así:
+        22dcc79 (HEAD -> main, origin/main, origin/HEAD) commit 5
+        d53c00f commit 4
+        2c3d41d commit 3
+        a323615 commit 2
+        ecb7ef3 commit 1
+        7ed9c6e creacion de repositorio
+        Podemos identificar que los commits a eliminar son d53c00f, 2c3d41d y a323615 (del 2 al 4).
+    2.  ejecutamos el comando rebase teniendo en cuenta que se debe retroceder hasta un commit previo a los que se quiere eliminar, en este caso retroceder hasta el comit 1 (ecb7ef3), lo que haría una cantidad de 4 commits a retroceder:
+        $ git rebase -i HEAD~4
+        Se nos mostrará un archivo nuevo un mensaje con los commits elegidos y una leyenda. Lo que hay que hacer es que delante de los commits a eliminar hay que cambiar la palabra 'pick' por 'drop', también se puede borrar las líneas de esos commits, funciona igual, también se eliminarán esos commits.
+    3.  Guardar y cerar este archivo. Listo. Ya se puede hacer push si se desea
+        $ git push origin +main
+        Prestar especial atención al «+» delante de la rama «main». Este caracter está indicando a git que fuerce el push a dicha rama. Si no se pone git se quejará y no podréis pushear el cambio. Una vez pusheado, comprobar cómo en el historial de commits han desaparecido los commits en cuestión.
+
     -------------------------------------------------------------------------------
     *******************************************************************************
     -------------------------------------------------------------------------------
