@@ -371,6 +371,10 @@ remote
     El nombre que se le da a una conexión NO es el nombre del repositorio real cuando se creó y no lo sustiruirá, es sólo un nombre temporal para trabajar con el repositorio local y remotamente a la vez.
     Una vez que se establece una conexión con un repositorio remoto, se puede utilizar por ejemplo el comando 'push' para subir nuestros cambios al repositorio remoto o 'pull' para bajar cambios a nuestra pc.
     Si no hay repositorios remotos configurados, este comando no mostrará nada.
+    Ejemplo. Mostrar las conextiones que actualmente se tienen configuradas:
+    $ git remote
+    Aquí se mostrará los nombres de las conexiones que se tengan configuradas. Si no hay conexiones configuradas este comando no mostrará nada.
+
     -v
         muestra las direcciones del repositorio origen para push (enviar cambios) y fetch (visualizar cambios). Nommalmente serán la misma dirección para ambos. Este comando no muestra ninguna info si no hay respositorios conectados. Utilizar add para agregar repositorios remotos antes de utilizar este comando.
     
@@ -383,7 +387,7 @@ remote
         $ git remote add opcion2 https://github.com/usuario/.....git
     rename <oldname> <newname>
         para renombrar un repositorio remoto
-    remove <name>
+    remove / rm <name> 
         para eliminar la conexion con un repositorio remoto.
     </div>
 
