@@ -412,7 +412,12 @@ push
     Ejemplo. Enviar datos desde un repositorio local a la rama nueva-rama de un repositorio remoto:
     $ git push origin nueva-rama
     En este caso si la rama en remoto no existe, se crea automáticamente.
-    -u
+    
+    --set-upstream / --set-upstream-to / -u <origin/branch>>
+    La forma '--set-upstream' no es más soportada oficialmente, en su lugar debe usarse '--set-upstream-to'. 
+    Define la rama de rastreo remota por defecto para la rama local actual. Cualquier futuro comando pull/push en la rama actual que ha sido definida con un upstream, tomará la info de la rama remota definida en <origin/branch>>, es decir que el futuro los comandos push/pull/fetch automáticamente entenderán a donde se requiere subir o bajar la info remotamente, git sabrá a donde quieres subir o bajar la info sólo ejecutando 'git push', o 'git pull' o 'git fetch' sin indicar nombres de ramas remotas, manteniendo una sincronización más directa.
+    Se puede lograr el mismo resultado con 'git branch --set-upstream-to' or 'git checkout --track'
+    
     </div>
 
 pull
