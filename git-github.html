@@ -255,10 +255,12 @@ branch
         2° Indicando el nombre antiguo y el nuevo nombre de la rama a cambiar. De esta forma no es necesario estar en la rama a la que renombrar.
         Ejemplo. Cambiar el nombre de la rama "version-JavaScript" a "version-js":
         $ git branch -m version-JavaScript version-js
-    -d
+    -d / -D
         Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, debemos estar en otra rama para poder borrarla.
         Ejemplo. Borrar la rama "version-py":
         $ git branch -d version-py
+        Esta eliminación de ramas no es definitiva, se puede recuperar la información. 
+        Cuando se usa -D funciona igual excepto que la eliminación es definitiva, no se puede recuperar nada de lo eliminado.
     
     -a
         visualiza todas las ramas disponibles en el repositorio incluidas las ramas remotas las cuales empiezan con 'remotes/origin' para denotar su estado remoto e indicar su presencia en un serivdor remoto:
@@ -414,14 +416,13 @@ push
     En este caso si la rama en remoto no existe, se crea automáticamente.
     
     --set-upstream / --set-upstream-to / -u <origin/branch>>
-    La forma '--set-upstream' no es más soportada oficialmente, en su lugar debe usarse '--set-upstream-to'. 
-    Define la rama de rastreo remota por defecto para la rama local actual (sólo desde la rama local actual). Cualquier futuro comando pull/push en la rama actual que ha sido definida con un upstream, tomará la info de la rama remota definida en <origin/branch>>, es decir que el futuro los comandos push/pull/fetch automáticamente entenderán a que rama desde la actual se requiere subir o bajar la info remotamente, git sabrá a donde quieres subir o bajar la info sólo ejecutando 'git push', o 'git pull' o 'git fetch' sin indicar nombres de ramas remotas, manteniendo una sincronización más directa.
-    Si en el repositorio remoto no existe la rama que qeremos q sea upstream (la que indicamos como argumento de este comando), se creará y Git nos informará de esto con un mensaje.
-    Si localmente se cambia de rama se tiene que volver a indicar un upstream para esta otra rama actual. Lo ideal es que las ramas tengan el mismo nombre local como remotamente para no confundir.
-    Ejemplo. Definir en el repositorio remoto (origin) el upstream de la rama local main:
-    $ git push -u origin main # este main no es la rama local sino la rama remota que recibirá los cambios de la rama main local, por eso debería tener el mismo nombre.
-    Se puede lograr el mismo resultado con 'git branch --set-upstream-to' or 'git checkout --track'
-    
+        La forma '--set-upstream' no es más soportada oficialmente, en su lugar debe usarse '--set-upstream-to'. 
+        Define la rama de rastreo remota por defecto para la rama local actual (sólo desde la rama local actual). Cualquier futuro comando pull/push en la rama actual que ha sido definida con un upstream, tomará la info de la rama remota definida en <origin/branch>>, es decir que el futuro los comandos push/pull/fetch automáticamente entenderán a que rama desde la actual se requiere subir o bajar la info remotamente, git sabrá a donde quieres subir o bajar la info sólo ejecutando 'git push', o 'git pull' o 'git fetch' sin indicar nombres de ramas remotas, manteniendo una sincronización más directa.
+        Si en el repositorio remoto no existe la rama que qeremos q sea upstream (la que indicamos como argumento de este comando), se creará y Git nos informará de esto con un mensaje.
+        Si localmente se cambia de rama se tiene que volver a indicar un upstream para esta otra rama actual. Lo ideal es que las ramas tengan el mismo nombre local como remotamente para no confundir.
+        Ejemplo. Definir en el repositorio remoto (origin) el upstream de la rama local main:
+        $ git push -u origin main # este main no es la rama local sino la rama remota que recibirá los cambios de la rama main local, por eso debería tener el mismo nombre.
+        Se puede lograr el mismo resultado con 'git branch --set-upstream-to' or 'git checkout --track'
     </div>
 
 pull
