@@ -497,7 +497,8 @@ stash
 <h2>PROCESOS</h2>
 <div>
 
-    ## PARA CREAR UN REPOSITORIO LOCAL (VACÍO)
+    <h3>PARA CREAR UN REPOSITORIO LOCAL (VACÍO)</h3>
+    <div>
     
     1.  Abrir la git bash
     2.  Situarse en la carpeta deseada que luego contendrá la carpeta .git que definirá la creación de un repositorio
@@ -507,10 +508,10 @@ stash
     
     Tener en cuenta que este proceso NO crea un commit, hay que hacerlo con el comando git commit, lo que será el primer commit del repositorio, a diferencia de crear un repositorio nuevo desde GitHub que automáticamente te crea un commit cuando creas un repositorio nuevo.
     
+    </div>
     
-    ## PARA CREAR UN REPOSITORIO LOCAL Y ENVIARLO LUEGO A REMOTO (GITHUB)
-    ENVIAR!!
-    
+    <h3>PARA CREAR UN REPOSITORIO LOCAL Y ENVIARLO LUEGO A REMOTO (GITHUB)</h3>
+    <div>
     1.  Tener o crear un repositorio local (con gitbash) que será el que se subirá. Este repositorio es el que tiene los archivos y commits que se desean subir.
     2.  ¿Tener? o crear un nuevo repositorio remoto (en GitHub) que será el que recibirá el repositorio local. No es necesario que éstos dos repositorios tengan el mismo nombre.
     3.  dar visibilidad al repositorio remoto en gitbash. Ejecutar el comando remote con add y la ruta https del repositorio remoto creado en el paso 2:
@@ -518,14 +519,20 @@ stash
     4.  Enviar la info del repositorio local al repositorio remoto con push (a la rama main del origin):
         git push origin main
     5.  Gitbash muestra un msg indicando que entre otras cosas, que se ha creado la rama main en el repositorio remoto nuevo creado en el paso 2. Además en VS Code también se empezarán a sincronizar los cambios.
-    
-    ## BIFURCAR (FORK) UN REPOSITORIO
-    hay que ir al repositorio que se le quiere hacer el fork y hacer clic en el botón 'fork' listo. El repositorio se bifurcado en tu cuenta de GitHub.
-    
-    ## PARA COMBINAR 2 REPOSITORIOS
-    Fuente: https://gist.github.com/msrose/2feacb303035d11d2d05
+    </div>
 
-    ## PARA ELIMINAR UNO O VARIOS COMMITS PREVIOS
+    <h3>BIFURCAR (FORK) UN REPOSITORIO</h3>
+    <div>
+    hay que ir al repositorio que se le quiere hacer el fork y hacer clic en el botón 'fork' listo. El repositorio se bifurcado en tu cuenta de GitHub.
+    </div>
+
+    <h3>PARA COMBINAR 2 REPOSITORIOS</h3>
+    <div>
+    Fuente: https://gist.github.com/msrose/2feacb303035d11d2d05
+    </div>
+
+    <h3>PARA ELIMINAR UNO O VARIOS COMMITS PREVIOS</h3>
+    <div>
     fuente: https://adictosaltrabajo.com/2023/01/05/como-eliminar-commits-de-la-rama-master/
     Si lo que se desea es eliminar una cantidad X de commits exactamente previos al actual (HEAD), utilizar el comando reset, es simple. Pero si se desea eliminar algún(os) commit(s) que están más atrás en el historial sin tocar los que exactamente preceden al actual se debe seguir los siguientes pasos:
     1.  Se desea eliminar los commits del 2 al 4. Obtener la lista de hash de los commits con git log --oneline. Obtendríamos algo así:
@@ -542,6 +549,7 @@ stash
     3.  Guardar y cerar este archivo. Listo. Ya se puede hacer push si se desea
         $ git push origin +main
         Prestar especial atención al «+» delante de la rama «main». Este caracter está indicando a git que fuerce el push a dicha rama. Si no se pone git se quejará y no podréis pushear el cambio. Una vez pusheado, comprobar cómo en el historial de commits han desaparecido los commits en cuestión.
+    </div>
 
     -------------------------------------------------------------------------------
     *******************************************************************************
