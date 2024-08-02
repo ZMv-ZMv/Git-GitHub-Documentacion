@@ -415,7 +415,11 @@ push
     
     --set-upstream / --set-upstream-to / -u <origin/branch>>
     La forma '--set-upstream' no es más soportada oficialmente, en su lugar debe usarse '--set-upstream-to'. 
-    Define la rama de rastreo remota por defecto para la rama local actual. Cualquier futuro comando pull/push en la rama actual que ha sido definida con un upstream, tomará la info de la rama remota definida en <origin/branch>>, es decir que el futuro los comandos push/pull/fetch automáticamente entenderán a donde se requiere subir o bajar la info remotamente, git sabrá a donde quieres subir o bajar la info sólo ejecutando 'git push', o 'git pull' o 'git fetch' sin indicar nombres de ramas remotas, manteniendo una sincronización más directa.
+    Define la rama de rastreo remota por defecto para la rama local actual (sólo desde la rama local actual). Cualquier futuro comando pull/push en la rama actual que ha sido definida con un upstream, tomará la info de la rama remota definida en <origin/branch>>, es decir que el futuro los comandos push/pull/fetch automáticamente entenderán a que rama desde la actual se requiere subir o bajar la info remotamente, git sabrá a donde quieres subir o bajar la info sólo ejecutando 'git push', o 'git pull' o 'git fetch' sin indicar nombres de ramas remotas, manteniendo una sincronización más directa.
+    Si en el repositorio remoto no existe la rama que qeremos q sea upstream (la que indicamos como argumento de este comando), se creará y Git nos informará de esto con un mensaje.
+    Si localmente se cambia de rama se tiene que volver a indicar un upstream para esta otra rama actual. Lo ideal es que las ramas tengan el mismo nombre local como remotamente para no confundir.
+    Ejemplo. Definir en el repositorio remoto (origin) el upstream de la rama local main:
+    $ git push -u origin main # este main no es la rama local sino la rama remota que recibirá los cambios de la rama main local, por eso debería tener el mismo nombre.
     Se puede lograr el mismo resultado con 'git branch --set-upstream-to' or 'git checkout --track'
     
     </div>
