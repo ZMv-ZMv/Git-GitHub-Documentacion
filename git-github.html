@@ -29,7 +29,7 @@
     
     -> para pasar a la siguiente área usar el comando add
     
-    2. Área de preparación (Stage / Staging area): es el área intermedia en la que se preparan los archivos y cambios que se van a subir al repositorio, es decir, serán incluídos en el próximo commit. Tener en cuenta que ésta no es una área definitiva, aún aquí se pueden agregar o eliminar componentes del futuro commit. Estos componentes NO son parte del repositorio. Cuando un archivo se encuentra en esta área decimos que se encuentra en una versión PREPARADA (ON STAGE).
+    2. Área de preparación (Stage / Staging area / Index): es el área intermedia en la que se preparan los archivos y cambios que se van a subir al repositorio, es decir, serán incluídos en el próximo commit. Tener en cuenta que ésta no es una área definitiva, aún aquí se pueden agregar o eliminar componentes del futuro commit. Estos componentes NO son parte del repositorio. Cuando un archivo se encuentra en esta área decimos que se encuentra en una versión PREPARADA (ON STAGE).
     
     -> para pasar a la siguiente área usar el comando commit
     
@@ -130,6 +130,10 @@ config
         $ git config --global alias.ss "status --short"
         Ejemplo. Crear un alias para checkout main
         $ git config --global alias.cm "checkout main"
+
+    --list
+        para mostrar todas las configuraciones guardadas
+
     </div>
 
 init
@@ -207,6 +211,9 @@ log
         para ver las diferencias entre los commits. no entiendo bien los mensajes en este modo !!!!!!!!!!
     --graph
         muestra el log de commits con 'lineas' simulando la secuencia gráfica de los commits.
+
+    --author="nombre"
+        muestra los commits creados por el autor 'nombre'
     
     </div>
 
@@ -607,6 +614,8 @@ touch
     Ejemplo. Crear los archivos 'style.css' y 'script.js':
     $ touch style.css script.js
 
+pwd
+    muestra la ruta de trabajo acutal
     -------------------------------------------------------------------------------
     *******************************************************************************
     -------------------------------------------------------------------------------
