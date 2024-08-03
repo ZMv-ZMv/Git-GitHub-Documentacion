@@ -90,10 +90,12 @@
 
 <h2>DESHACER CAMBIOS EN UN REPOSITORIO</h2>
 <div>
-Para deshacer acciones en Git normalmente se usan los comandos reset, revert, checkout, rebase.
+Para deshacer acciones en Git normalmente se usan los comandos reset, revert, checkout, rebase, restore.
 <img src="img/checkout reset revert.png" alt="">
 En el contexto de deshacer acciones estos comandos se usan para:
-ckeckout: regresar o desplazarse a ver el estado de un commit
+<strong>ckeckout</strong>: regresar o desplazarse a ver el estado de un commit previo, también para restaurar el estado de uno o varios archivos a su versión del commit actual (es decir, si se les ha realizado cambios desde el último commit y no se han comiteado esos cambios, entonces se regresa a la versión del commit.)
+<strong>reset</strong>: elimina todos los commits consecutivos hasta el commit indicado. No se recomienda para commits en repositorios remotos ya que puede eliminarse información que otro usuario sí la tenga en cuenta.
+<strong>revert</strong>: trae el estado de un commit previo hacia la posición final de la rama saltándose los cambios de los commits posteriores, creando nuevos commits desde esas versiones anteriores. Es el más seguro para la colaboración remota ya que no se elimina ningún commit.
 </div>
 
 -------------------------------------------------------------------------------
