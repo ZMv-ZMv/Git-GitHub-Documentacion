@@ -328,15 +328,25 @@ restore
     Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit:
     $ git restore myfile
     ¿en este caso funciona como el comando checkout?
-    Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. Para restaurar un archivo a un commit antecesor al actual se debe espeficar el número de commits hacia atrás desde el HEAD actual, el commit actual no cuenta (sería como el 0), se empieza a contar 1 desde el commit anterior. Si en ese momento se desea regresar a la versión del HEAD hay que indicar 0 como número de commits hacia atrás.
-    Ejemplo. Restaurar el archivo 'file.txt' hacia 3 commits previos al presente HEAD:
-    $ git restore --source HEAD~3 file.txt
-    Ejemplo. Restaurar a la versión del HEAD (commit 0) el archivo file.txt
-    & git restore --source HEAD~0 file.txt
+    Ejemplo. Restaurar todos los archivos eliminando sus cambios no comiteados a la versión del commit actual (donde está el HEAD):
+    $ git restore . 
+    Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. 
     Este comando también sirve para remover archivos del área de preparación.
     Ejemplo. Remover el archivo file.txt del área de stage:
     $ git restore --staged file.txt
     Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
+
+    --source
+        Para restaurar un archivo a un commit antecesor al actual. Este commit antecesor se puede espeficar de dos maneras:
+        1. indicando el número de hash.
+        Ejemplo. Restaurar la rama al commit 7ef42e1 (notar el punto al final):
+        $ git restore --source 7ef42e1 .
+        2. indicando el número de commits hacia atrás desde el HEAD actual, el commit actual no cuenta (sería como el 0), se empieza a contar 1 desde el commit anterior. Si en ese momento se desea regresar a la versión del HEAD hay que indicar 0 como número de commits hacia atrás.
+        Ejemplo. Restaurar el archivo 'file.txt' hacia 3 commits previos al presente HEAD:
+        $ git restore --source HEAD~3 file.txt
+        Ejemplo. Restaurar a la versión del HEAD (commit 0) el archivo file.txt
+        & git restore --source HEAD~0 file.txt
+    
     </div>
 
 merge
@@ -454,6 +464,11 @@ switch
         Ejemplo. Crear la nueva rama 'lanzamiento' y cambiar hacia ella:
         $ git switch -c lanzamiento
         Switched to a new branch 'lanzamiento'
+
+    - 
+        para cambiar a la rama principal (main o master)
+        Ejemplo:
+        $ git switch - 
     </div>
 
 diff
