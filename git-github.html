@@ -7,6 +7,14 @@
 </head>
 <body>
 
+<h2>Páginas útiles:</h2>
+    <div>
+    Algunas páginas útiles para apreder Git:
+    <ul>
+        <li>https://www.atlassian.com/git</li>
+    </ul>
+    </div>
+
 <h2>¿Qué es Git</h2>
 <div>
     Es un sistema de control de versiones que nos permite rastrear o administrar los cmabios que hemos hecho en un conjunto de archivos.
@@ -106,6 +114,11 @@ COMANDOS GIT
 <div>
 se debe escribir git antes de cada comando.
 Estas configuraciones se guardan en el archivo C:\Users\<usuario>\.gitconfig
+
+ls-files
+    <div>
+    para mostrar los archivos que existen en woriking area de la rama actual.
+    </div>
 
 config
     <div>
@@ -278,6 +291,31 @@ revert
     $ git revert 17a5135
     </div>
 
+clean
+    <div>
+    Eliminará archivos o carpetas que NO han sido incluidos en ningún momento en el área de preparación, es decir, son archivos del working area a los cuales nunca se les ha aplicado el comando add, por tanto no están siendo rastreados.
+    Tener encuenta que si hay archivos que en algún momento anterior se han agregado al área de preparación entonces SÍ están siendo rastreados por tanto no serán afectados por este comando así tengan cambios desde el último commit que no hayan sido agregados al área de preparación, estos archivos y sus cambios no se verán afectados por este comando.
+    Este comando difiere justamente en este aspecto a otros comandos como reset o checkout ya que estos últimos operan sobre archivos que ya se han agregado en algún momento al área de preparación, es decir, están siendo rastreados.
+    Los efectos de este comando son irrecuperables por ello siempre se recomienda primero ejecutar este comando con el flag -n
+
+    -n / --dry-run
+        hace que el comando clean no haga efectiva ninguna acción (no elimina nada), en vez de ello listará los archivos o carpetas a eliminar sin realizar afectación alguna sobre ellos. Es una medida de seguridad antes de proceder con la eliminación efectiva de los elementos involucrados.
+
+    -f / --force
+        Es necesario siempre indicar este flag -f cuando realmente se desee que este comando tenga efecto alguno, ya que si se ejecuta el comando limpio sin flags (git clean), se mostrará un mensaje indicando que no se procederá con la ejecución del comando:
+        fatal: clean.requireForce is true and -f not given: refusing to clean
+        
+    -d  
+        para indicar a clean que también elimine directorios no rastreados ya que por /defecto clean no los incluye para ser eliminados. Este flag es siempre recomendado ya que las carpetas no rastreadas incluyen siempre archivos no rastreados. Si dentro de la carpeta hay algún archivo rastreado, entonces es suficente para considerar a la carpeta como rastreada por tanto la carpeta en sí no se verá afectada por clean. Si hay archivos no rastreados dentro de ella y se incluye este flag -d entonces estos archivos sí serán elimiandos.
+    
+    Todos estos flags se pueden -y se deben- combinar para tener los resultados deseados:
+    $ git clean -n # muestra la lista de los archivos a ser afectados por clean
+    $ git clean -dn # (o -nd) muestra la lista de archivos y carpetas que serán afectados por clean
+    $ git clean -f # elimina archivos no rastreados en el directorio actual
+    $ git clean -df # (o -fd) elimina archivos y carpetas no rastreados.
+
+    </div>
+
 branch
     <div>
     Para crear ramas nuevas en el repositorio o ver las que actualmente existen, borrar ramas.
@@ -304,7 +342,7 @@ branch
         Esta eliminación de ramas no es definitiva, se puede recuperar la información. 
         Cuando se usa -D funciona igual excepto que la eliminación es definitiva, no se puede recuperar nada de lo eliminado.
     
-    -a
+    -a / --all
         visualiza todas las ramas disponibles en el repositorio incluidas las ramas remotas las cuales empiezan con 'remotes/origin' para denotar su estado remoto e indicar su presencia en un serivdor remoto:
         $ git branch -a
         * main
@@ -368,9 +406,10 @@ restore
     IMPORTANTE: En el caso de ejecutar este comando desde el último commit de una rama y además se tiene avanzado cambios sobre ese último commit (que obviamente no se han comiteado) se perderán definitivamente estos últimos cambios y peor aún, los efectos de este comando no se pueden deshacer ya que los cambios, se supone, nunca han sido comiteados por tanto no han sido versionados ni guardados, por tanto se perderán definitivamente.
     Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit:
     $ git restore myfile
-    ¿en este caso funciona como el comando checkout?
+    En este caso funciona igual que el comando checkout: $ git checkout myfile
     Ejemplo. Restaurar todos los archivos eliminando sus cambios no comiteados a la versión del commit actual (donde está el HEAD):
     $ git restore . 
+    En este caso funciona igual que el comando checkout: $ git checkout .
     Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. 
     Este comando también sirve para remover archivos del área de preparación.
     Ejemplo. Remover el archivo file.txt del área de stage:
@@ -378,7 +417,7 @@ restore
     Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
 
     --source
-        Para restaurar un archivo a un commit antecesor al actual. Este commit antecesor se puede espeficar de dos maneras:
+        Para restaurar un archivo a un commit antecesor (más antiguo) al actual. Este commit antecesor se puede espeficar de dos maneras:
         1. indicando el número de hash.
         Ejemplo. Restaurar la rama al commit 7ef42e1 (notar el punto al final):
         $ git restore --source 7ef42e1 .
