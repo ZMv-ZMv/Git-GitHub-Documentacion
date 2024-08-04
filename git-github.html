@@ -194,7 +194,13 @@ commit
     Lo ideal es trabajar en conjunto con visual studio code para trabajar la descripción de manera más interactiva y no con el flag -m. Para hacer esto sólo hay que ejecutar este comando sin argumentos ni flags: git commit y enter, esto hará que se abra VS Code con un archivo y esperará a que se guarde y se cierre para terminar con el commit. Para crear commits dentro de una rama sólo hay que estar en ella.
     
     --amend
-        para modificar un commit. Hay que tener mucho cuidado con editar commits ya que ya podría haber sido descargado por otro usuario antes de hacer la modificación. Lo recomendable es hacer estas modificaciones en local. --amend espera a que se cierre el archivo de mensaje (en le editor) para terminar con la edición del commit.
+        para modificar un commit ya realizado, modificar el mensaje, añadir o quitar archivos, etc. Hay que tener mucho cuidado con editar commits en repositorios remotos ya que ya podría haber sido descargado por otro usuario antes de hacer la modificación. Lo recomendable es hacer estas modificaciones en local. --amend espera a que se cierre el archivo de mensaje (en le editor) para terminar con la edición del commit. Este comando sirve únicamente cuando queremos modificar únicamente el commit previo inmediatamente anterior.
+        Si lo único que se necesita es modificar el mensaje del commit, luego de este flag hay que agregar el flag -m seguido del nuevo mensaje:
+        $ git commit --amend -m "mensaje de commit modificado"
+
+        --no-edit
+            normalmente cuando se modifica un commit se abre VS Code para editar el mensaje del commit. Este flag permite que no se abra el archivo del mesaje para modificar el mensaje, es decir, no modificaremos el mensaje del commit, sino otra cosa como por ejemplo agregar o quitar archivos del commit.
+
     -m
         para indicar el mensaje del commit. Tiene que ser sí o sí una única línea, pero se puede usar múltiples -m por cada línea que se desea agregar al mensaje.
 
@@ -383,6 +389,9 @@ restore
         & git restore --source HEAD~0 file.txt
     
     </div>
+
+rebase
+    para modificar uno o varios commits previos, no consecutivos.
 
 merge
     <div>
