@@ -93,7 +93,7 @@
 
 <h2>Gitignore</h2>
 <div>
-es un archivo que deberá encontrarse en la raíz del repositorio y deberá tener el nombre: .gitignore, notar el punto al inicio. Dentro de este archivo se incluirán los archivos, rutas, expresiones que no queremos tener en cuenta para los commits. Basicamente todo lo que no va a formar parte del repositorio.
+es un archivo que deberá crearse manuealmente y situarse en la raíz del repositorio y deberá tener el nombre: .gitignore, notar el punto al inicio. Dentro de este archivo se incluirán los archivos, rutas, expresiones que no queremos tener en cuenta para los commits. Basicamente todo lo que no va a formar parte del repositorio.
 Para ver el formato de este archivo ir al repositorio https://github.com/ZMv-ZMv/IGNORE
 </div>
 
@@ -292,7 +292,7 @@ reset
     Tener en cuenta que este comando puede crear commits huérfanos ya que si por ejemplo retrocedo 5 commits y existe una rama creada 3 commits atrás, esta rama no tendrá ahora un commit de inicio, no se le podrá identificar de donde vino, lo cual es problemático. Es por este motivo que este comando reset debe utilizarse con mucho cuidado o cuando se está trabajando con una sola rama o cuando se sabe bien lo que hace y las implicancias del los resultados. Un comando mucho más seguro en estos casos sería 'revert'.
     También se puede usar reset con archivos para sacarlos del área de preparación:
     $ git reset HEAD <archivo>
-    Esto elimina el archivo del área de preparación, pero los cambios realizados en el archivo seguirán presentes en el directorio de trabajo (el archivo queda en estado modificado). Luego, si deseas descartar esos cambios completamente, puedes usar git checkout 
+    Esto elimina el archivo del área de preparación, pero los cambios realizados en el archivo seguirán presentes en el directorio de trabajo (el archivo queda en estado modificado). Luego, si deseas descartar esos cambios completamente, puedes usar git checkout o git restore igual sobre el archivo.
     </div>
 
 revert
@@ -416,15 +416,17 @@ checkout
 restore        
     <div>
     devuelve un archivo al estado de un commit previo el cual puede ser el más reciente o algun otro, también sirve para remover archivos del área de preparación.
-    IMPORTANTE: En el caso de ejecutar este comando desde el último commit de una rama y además se tiene avanzado cambios sobre ese último commit (que obviamente no se han comiteado) se perderán definitivamente estos últimos cambios y peor aún, los efectos de este comando no se pueden deshacer ya que los cambios, se supone, nunca han sido comiteados por tanto no han sido versionados ni guardados, por tanto se perderán definitivamente.
-    Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit:
+    IMPORTANTE: En el caso de ejecutar este comando desde el último commit de una rama y además se tiene avanzado cambios:
+    1. que se han agregado al stage: los cambios se mantendrán en el archivo y éste en un estado 'preparado', es como si no hiciera nada, por tanto no tiene mucho sentido usar este comando sobre archivos agregados al stage.
+    2. que No se han agregado al stage: se perderán definitivamente estos últimos cambios y peor aún, los efectos de este comando no se pueden deshacer ya que los cambios, se supone, nunca han sido comiteados ni agregados al stage por tanto no han sido versionados ni guardados, por tanto se perderán definitivamente.
+    Ejemplo. Restaurar el archivo 'myfile.txt' a su versión del último commit (los cambios no se han agregado al stage):
     $ git restore myfile
     En este caso funciona igual que el comando checkout: $ git checkout myfile
-    Ejemplo. Restaurar todos los archivos eliminando sus cambios no comiteados a la versión del commit actual (donde está el HEAD):
+    Ejemplo. Restaurar todos los archivos a la versión del commit actual (donde está el HEAD, y no se ha agregado nada al stage):
     $ git restore . 
     En este caso funciona igual que el comando checkout: $ git checkout .
     Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. 
-    Este comando también sirve para remover archivos del área de preparación. En este caso los cambios que se hicieron al archivo para agregarlo al área de preparación se mantendrán y pasarán a estar en estado modificado. Se puede usar checkout en este momento si se desea eliminar totalmente los cambios con respecto al commit (al igual que reset).
+    En caso se desee restaurar archivos desde el área de preparación, este comando también sirve para remover archivos del área de preparación. En este caso los cambios que se hicieron al archivo para agregarlo al área de preparación se mantendrán y pasarán a estar en estado modificado. Se puede usar checkout, reset o el mismo restore sobre el archivo en este momento si se desea eliminar totalmente los cambios con respecto al commit (git checkout archivo, git restore archivo).
     Ejemplo. Remover el archivo file.txt del área de stage:
     $ git restore --staged file.txt
     Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
