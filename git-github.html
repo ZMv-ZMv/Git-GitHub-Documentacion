@@ -424,7 +424,7 @@ restore
     $ git restore . 
     En este caso funciona igual que el comando checkout: $ git checkout .
     Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. 
-    Este comando también sirve para remover archivos del área de preparación. En este caso los cambios que se hicieron al archivo para agregarlo al área de preparación se mantendrán y pasarán a estar en estado modificado.
+    Este comando también sirve para remover archivos del área de preparación. En este caso los cambios que se hicieron al archivo para agregarlo al área de preparación se mantendrán y pasarán a estar en estado modificado. Se puede usar checkout en este momento si se desea eliminar totalmente los cambios con respecto al commit (al igual que reset).
     Ejemplo. Remover el archivo file.txt del área de stage:
     $ git restore --staged file.txt
     Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
