@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
@@ -98,13 +99,21 @@ Para ver el formato de este archivo ir al repositorio https://github.com/ZMv-ZMv
 
 <h2>DESHACER CAMBIOS EN UN REPOSITORIO</h2>
     <div>
+    <p>Referencias:</p>
+    <img src="https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting" alt="">
     Para deshacer acciones en Git normalmente se usan los comandos reset, revert, checkout, rebase, restore.
     <img src="img/checkout reset revert.png" alt="">
     En el contexto de deshacer acciones estos comandos se usan para:
-    <strong>ckeckout</strong>: regresar o desplazarse para reflejar en el área de trabajo al estado de un commit previo, también para restaurar el estado de uno o varios archivos a su versión del commit actual (HEAD) (es decir, si se les ha realizado cambios desde el último commit y no se han comiteado esos cambios, entonces se regresa a la versión del commit). Tener en cuenta que checkout, al resturar commits (o archivos a la versión de un commit), no deja nada en estado modificado, ni cambios en los archivos y tampoco nada en el stage, justamente porque presenta la información únicamente de lo comiteado.
+    <strong>ckeckout <archivo></strong>: actualiza o restaura uno o varios archivos reflejando en el área de trabajo el estado de un commit indicado que puede ser el commit actual (HEAD) o uno previo:
+    1. checkout sobre el commit actual (HEAD): esta afectación sólo se producirá para archivos que estén en estado 'modificado', es decir, que NO hayan sido agregados al área de preparación y tengan cambios después del último commit. En este caso, el comando git checkout NO deshace cambios en archivos que han sido agregados al área de preparación (staging area) porque su función principal está orientada a restaurar archivos en el directorio de trabajo a su estado anterior, es decir, a un commit. Cuando un archivo está en el área de preparación, Git lo considera listo para ser confirmado, y git checkout no afecta a esos archivos. Ejemplo:
+    $ git checkout archivo.txt # restaura archivo.txt al último commit siempre y cuando no haya sido agregado al área de preparación.
+    2. Checkout a un Commit Anterior: cuando ejecutas git checkout <commit> (donde <commit> es un hash de un commit anterior) o git checkout HEAD~N (donde N es el número de commits a retroceder), Git cambia el HEAD a ese commit (modo detached HEAD). En este caso, se restablecerá tanto el Área de Preparación como el Directorio de Trabajo al estado de ese commit. Esto significa que todos los archivos en el área de preparación y en el directorio de trabajo se actualizarán para reflejar el estado en ese commit. Por lo tanto, si tenías cambios en el área de preparación, esos cambios se perderán, ya que el área de preparación se sincroniza con el commit al que estás haciendo checkout.
+    
     <strong>reset</strong>: elimina todos los commits consecutivos hasta el commit indicado. No se recomienda para commits en repositorios remotos ya que puede eliminarse información que otro usuario sí la tenga en cuenta.
+    
     <strong>revert</strong>: trae el estado de un commit previo hacia la posición final de la rama saltándose los cambios de los commits posteriores, creando nuevos commits desde esas versiones anteriores. Es el más seguro para la colaboración remota ya que no se elimina ningún commit.
     <img src="img/checkout reset revert_1.png" alt="">
+    hacer una tabla con todos estos comandos y sus afectaciones 
     </div>
 
 -------------------------------------------------------------------------------
@@ -272,7 +281,7 @@ reflog
 
 reset
     <div>
-    para dehacer un commit (eliminarlo).
+    para dehacer uno o varios commits (eliminarlos).
     Ejemplo. Para eliminar el último commit:
     $ git reset --soft HEAD~1
     --soft : los archivos en el directorio de trabajo nose ven afectado por la eliminación del commit, quedan tal cual están antes de eliminar el commit, quedarían en el working area, es decir, es el commit lo que desaparece, los archivos y sus cambios permanecen intactos. En Visual Studio quedarían marcados con la letra M en señal de que están modificados, ya que esa es su situación real
@@ -281,6 +290,9 @@ reset
     Si se desea eliminar también los archivos tanto como los commits se debe reemplazar este flag por el flag --hard. Tener en cuenta que esta acción es irrevocable.
     HEAD~1 : deshace un cambio desde el HEAD (desde lo último commit subido)
     Tener en cuenta que este comando puede crear commits huérfanos ya que si por ejemplo retrocedo 5 commits y existe una rama creada 3 commits atrás, esta rama no tendrá ahora un commit de inicio, no se le podrá identificar de donde vino, lo cual es problemático. Es por este motivo que este comando reset debe utilizarse con mucho cuidado o cuando se está trabajando con una sola rama o cuando se sabe bien lo que hace y las implicancias del los resultados. Un comando mucho más seguro en estos casos sería 'revert'.
+    También se puede usar reset con archivos para sacarlos del área de preparación:
+    $ git reset HEAD <archivo>
+    Esto elimina el archivo del área de preparación, pero los cambios realizados en el archivo seguirán presentes en el directorio de trabajo (el archivo queda en estado modificado). Luego, si deseas descartar esos cambios completamente, puedes usar git checkout 
     </div>
 
 revert
@@ -412,7 +424,7 @@ restore
     $ git restore . 
     En este caso funciona igual que el comando checkout: $ git checkout .
     Tecnicamente hablando, restore devolverá el archivo a la versión HEAD, la cual tipicamente apunta al último commit de la rama, pero debido a que se puede apuntar el HEAD a cualquier commit, podemos restaurar un archivo a cualquier commit previo, dándonos mucha flexibilidad a la hora de querer restaurar un archivo a cualquier estado. 
-    Este comando también sirve para remover archivos del área de preparación.
+    Este comando también sirve para remover archivos del área de preparación. En este caso los cambios que se hicieron al archivo para agregarlo al área de preparación se mantendrán y pasarán a estar en estado modificado.
     Ejemplo. Remover el archivo file.txt del área de stage:
     $ git restore --staged file.txt
     Tener en cuenta que este comando NO desplaza el HEAD a otra ubicación como lo hace el comando checkout, sino que un archivo es llevado a una versión anterior, el HEAD sigue estando donde estaba antes de ejecutar este comando.
