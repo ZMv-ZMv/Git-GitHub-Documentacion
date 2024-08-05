@@ -92,19 +92,20 @@
 
 <h2>Gitignore</h2>
 <div>
-    es un archivo que deberá encontrarse en la raíz del repositorio y deberá tener el nombre: .gitignore, notar el punto al inicio. Dentro de este archivo se incluirán los archivos, rutas, expresiones que no queremos tener en cuenta para los commits. Basicamente todo lo que no va a formar parte del repositorio.
-    Para ver el formato de este archivo ir al repositorio https://github.com/ZMv-ZMv/IGNORE
+es un archivo que deberá encontrarse en la raíz del repositorio y deberá tener el nombre: .gitignore, notar el punto al inicio. Dentro de este archivo se incluirán los archivos, rutas, expresiones que no queremos tener en cuenta para los commits. Basicamente todo lo que no va a formar parte del repositorio.
+Para ver el formato de este archivo ir al repositorio https://github.com/ZMv-ZMv/IGNORE
 </div>
 
 <h2>DESHACER CAMBIOS EN UN REPOSITORIO</h2>
-<div>
-Para deshacer acciones en Git normalmente se usan los comandos reset, revert, checkout, rebase, restore.
-<img src="img/checkout reset revert.png" alt="">
-En el contexto de deshacer acciones estos comandos se usan para:
-<strong>ckeckout</strong>: regresar o desplazarse a ver el estado de un commit previo, también para restaurar el estado de uno o varios archivos a su versión del commit actual (es decir, si se les ha realizado cambios desde el último commit y no se han comiteado esos cambios, entonces se regresa a la versión del commit.)
-<strong>reset</strong>: elimina todos los commits consecutivos hasta el commit indicado. No se recomienda para commits en repositorios remotos ya que puede eliminarse información que otro usuario sí la tenga en cuenta.
-<strong>revert</strong>: trae el estado de un commit previo hacia la posición final de la rama saltándose los cambios de los commits posteriores, creando nuevos commits desde esas versiones anteriores. Es el más seguro para la colaboración remota ya que no se elimina ningún commit.
-</div>
+    <div>
+    Para deshacer acciones en Git normalmente se usan los comandos reset, revert, checkout, rebase, restore.
+    <img src="img/checkout reset revert.png" alt="">
+    En el contexto de deshacer acciones estos comandos se usan para:
+    <strong>ckeckout</strong>: regresar o desplazarse para reflejar en el área de trabajo al estado de un commit previo, también para restaurar el estado de uno o varios archivos a su versión del commit actual (HEAD) (es decir, si se les ha realizado cambios desde el último commit y no se han comiteado esos cambios, entonces se regresa a la versión del commit). Tener en cuenta que checkout, al resturar commits (o archivos a la versión de un commit), no deja nada en estado modificado, ni cambios en los archivos y tampoco nada en el stage, justamente porque presenta la información únicamente de lo comiteado.
+    <strong>reset</strong>: elimina todos los commits consecutivos hasta el commit indicado. No se recomienda para commits en repositorios remotos ya que puede eliminarse información que otro usuario sí la tenga en cuenta.
+    <strong>revert</strong>: trae el estado de un commit previo hacia la posición final de la rama saltándose los cambios de los commits posteriores, creando nuevos commits desde esas versiones anteriores. Es el más seguro para la colaboración remota ya que no se elimina ningún commit.
+    <img src="img/checkout reset revert_1.png" alt="">
+    </div>
 
 -------------------------------------------------------------------------------
 *******************************************************************************
@@ -430,7 +431,9 @@ restore
     </div>
 
 rebase
+    <div>
     para modificar uno o varios commits previos, no consecutivos.
+    </div>
 
 merge
     <div>
