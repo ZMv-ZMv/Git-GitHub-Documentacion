@@ -566,7 +566,7 @@ switch
         Switched to a new branch 'lanzamiento'
 
     - 
-        para cambiar a la rama principal (main o master)
+        para cambiar a la rama anterior.
         Ejemplo:
         $ git switch - 
     </div>
@@ -588,20 +588,59 @@ tag
 
 stash
     <div>
-    almacena temporalmente los cambios de una rama para poder cambiar a otra rama, trabajar en esta última y luego poder regresar al stash y seguir trabajando sobre ese estado. stash guarda temporalmente el estado de los archivos sin hacer commits. stash es últil en situaciones en que se está trabajando en una rama digamos 'rama-trabajo' se ha avanzado cambios ahí y se desea cambiar temporalmente a otra rama, a main por ejemplo, para hacer algo rápido o pequeño, terminar eso y regresar a la rama 'rama-trabajo' para seguir trabajando donde se dejo el avance, sin hacer ningún commit en 'rama-trabajo' durante todo este proceso. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas usando el flag apply.
-    Por defecto, Git no guarda en el stash los cambios hechos en archivos que no se les está haciendo reastreo (archivos untracked) o archivos ignorados (con .ignore).
+    almacena temporalmente los cambios de una rama para poder cambiar a otra rama, trabajar en esta última y luego poder regresar al stash y seguir trabajando sobre ese estado. stash saca del área de trabajo y guarda temporalmente el estado de los archivos sin hacer commits. stash es últil en situaciones en que se está trabajando en una rama digamos 'rama-trabajo' se ha avanzado cambios ahí y se desea cambiar temporalmente a otra rama, a main por ejemplo, para hacer algo rápido o pequeño, terminar eso y regresar a la rama 'rama-trabajo' para seguir trabajando donde se dejo el avance, sin hacer ningún commit en 'rama-trabajo' durante todo este proceso. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas usando el flag apply.
+    Una vez ejecutado este comando todos los archivos agregados al área de preparación serán sacados del área de preparación y puestos en el stash y si se ejecuta status, informará de que no hay cambios en el area de trabajo, como si se hubieran eliminado esos cambios.
+    El orden en que se guardan los stash es importante, el último stash creado tendrá el índice 0 y los creados anteriormente serán renumerados consecutivamente, actualizando su índice con cada stash agregado.
+    Por defecto, Git no guarda en el stash los cambios hechos en archivos que no se les está haciendo reastreo (archivos untracked) o archivos ignorados (con .ignore) a no ser que se aplique el flag -u.
+    Ejemplo. Poner los archivos de stage al stash:
+    $ git stash
+    esto crea un stash con los archivos. Git muestra un mensaje confirmando la creación del stash
+
+    -m / save
+        permite incluir un mensaje con el stash. Esto es muy útil ya que en lugar de que git genere un hash aleatorio para identificar el stash creado, es éste mensaje el identificador, permitiendo un trabajo más fácil cuando se tienen múltiples stash.
+        Ejemplo. Crear un stash con el mensaje "hacer mas pruebas"
+        $ git stash -m "hacer mas pruebas" # ó
+        $ git stash save "hacer mas pruebas"
 
     list
         para ver lo que se tiene en los stash. Se muestra todos los stash con información almacenada. Si no hay información en stash, este comando no devuelve nada.
+        $ git stash list
+        stash@{0}: On main: add style to our site
+        stash@{1}: WIP on main: de39f5c added README 
+        {n}  -> número índice del stash, el último stash creado es el 0
+        WIP  -> si no se especifica un mensaje (ver -m), se identifica al stash como work in progress
+        on main -> la rama actual sobre la que se está trabajando.
+        de39f5c added README -> el hash identificador y mensaje del commit sobre el que se hizo el stash. Si se ha incluido un mensaje para el stash (con -m), este mensaje saldrán en esta posición.
+
+    show
+        muestra el contenido del último stash creado (o uno anterior si se especifica un índice con el flag --index).
+
     pop
-        recupera lo que hay almacenado en el stash para seguir trabajando normalmente y elimina lo que hay en el stash (elimina el stash) de modo que ya no se puede volver a referenciar.
+        recupera lo que hay almacenado en el último stash creado (o uno anterior si se especifica un índice con el flag --index), para seguir trabajando normalmente y elimina lo que hay en el stash (elimina el stash) de modo que ya no se puede volver a referenciar.
 
     apply
-        recupera lo que hay almacenado en el stash para seguir trabajando normalmente pero NO elimina lo que hay en el stash (no elimina el stash), pudiendo volver a tener opción de recuperar en otro momento lo que hay en el stash. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas.
+        recupera lo que hay almacenado en el último stash creado (o uno anterior si se especifica un índice con el flag --index), para seguir trabajando normalmente pero NO elimina lo que hay en el stash (no elimina el stash), pudiendo volver a tener opción de recuperar en otro momento lo que hay en el stash. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas.
         Sería como una versión más segura de pop ya que no elimina la info.
 
     drop
-        elimina la información del stash sin recuperarla.
+        elimina la información del último stash creado (o uno anterior si se especifica un índice con el flag --index) sin opción a recuperarla.
+
+    clear
+        elimina toda la pila de stash creados.
+
+    --index
+        cuando se trabaja con show, pop, apply, y drop se puede especificar también este flag para que la acción de estos comandos no sea sobre el último stash creado (el índice 0). Ejemplos:
+        $ git stash pop --index 1
+
+    -u
+        el funcionamiento normal de stash es no agregar archivos que no están siendo rastreados, entonces si se desea incluir archivos no rastreados hay que rastrearlos agregándolos al stage con el comando add. Este flag permite agregar todos los archivos, rastreados y no rastreados al stash, eliminando la necesidad de ejecutar add.
+
+    branch
+        Crea una nueva rama y trae información almacenada en un stash hacia esta nueva rama creada y la hace activa para seguir trabajando en ella. Es util cuando al traer información del stash se producen conflictos que hay que solucionar.
+        Ejemplo. Traer el stash de index 5 sobre una nueva rama llamada Rev03
+        $ git stash branch Rev03 stash@{5} # ó
+        $ git stash branch Rev03 5
+
     </div>
 
     -------------------------------------------------------------------------------
