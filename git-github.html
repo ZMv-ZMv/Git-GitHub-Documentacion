@@ -454,12 +454,28 @@ merge
     para fusionar ramas. Se debe estar en la rama que recibirá la fusión. Notar que mientras se está haciendo la fusión, el mensaje de Git sobre la rama actual muestra también la palabra MERGING: (main|MERGING)
     Ejemplo. Fusionar la rama "version-js" con la rama actual:
     $ git merge version-js
-    ¿Qué es fast-forward merge?
-    Es la forma más simple de fusionar ramas, se produce cuando por ejemplo sobre la rama main, se ha creado otra rama por ejemplo llamada 'version02', se ha avanzado algunos commits sobre esta última rama mientras que no se ha avanzado nada sobre la rama main, en este caso una fusión con la rama main será muy simple ya que la fusión sólo se trata de acutalizar la main con los commits avanzados en la rama 'version02'. En estos casos git nos indica con un mensaje este tipo de merge que estamos realizando, por ejemplo nos mostraría un mensaje así:
+    
+    <h3>fast-forward merge</h3>
+    Es la forma más simple de fusionar ramas, se produce cuando por ejemplo sobre la rama main, se ha creado otra rama por ejemplo llamada 'version02', se ha avanzado algunos commits sobre esta última rama mientras que no se ha avanzado nada sobre la rama main, en este caso una fusión con la rama main será muy simple ya que la fusión sólo se trata de acutalizar main con los commits avanzados en la rama 'version02'. 
+    Esta forma de unir ramas no genera nuevos commits sino que trae los commits de la rama que se quiere unir (en este caso version02), sobre la rama a la que se desea unir (en este caso main), lo único que sucede es que todo el historial de commits de version02 son ahora parte de main y el HEAD de la rama main se mueve al último commit de la rama vesion02 que ahora pertenece a la rama main.
+    En estos casos git nos indica con un mensaje este tipo de merge que estamos realizando, por ejemplo nos mostraría un mensaje así:
     Updating 9cd41ce..f0f439c
     Fast-forward
     myfile.txt | 4 +++-
     1 file changed, 3 insertions(+), 1 deletion(-)
+    
+    <h3>Recursive merge o ort??????</h3>
+    Este método se realiza normalmente cuando un merge genera conflictos en la unión de las ramas. Aquí es necesario primero resolver los conflictos y luego finalizar el merge con un commit en la rama actual. En caso que no hayan confictos igual se puede forzar este método con el flag --no-ff, Git genera automáticamente el commit de unión en la rama actual.
+
+    --ff
+    --no-ff
+        Se refieren al modo 'fast-forward'. El modo --ff es el activo por defecto, es decir si se puede realizar un merge con fast-forward automáticamente, git lo realizará, trayendo el historial de commits de la rama a unir hacia la rama actual y ubicando el HEAD en el último commit todo esto sin realizar ningún commit extra a los ya existentes en cada rama. Si se indica --no-ff, aunque sea posible realizar un fast-forward, no se realizará, en este caso ser realizará un merge tipo 'ort' que sí generará un commit automáticamente.
+
+    
+
+    --squash
+        Une el último commit de la rama que desea traer sobre la rama actual, el resto de commits de la rama que se desea traer no se tienen en cuenta. Este flag no genera nuevos commits pero sí será necesario luego crear uno para terminar con el merge ya que la información de ese último commit es traída sólo como cambios agregados al área de prepación de la rama actual.
+    
     Cuando hay conflictos en una unión primero se deben resolver los conflictos, luego utilizar --continue, luego add para llevar los cambios a stage y luego un commit. Ese es el proceso para terminar con un merge con conflictos. Sino, se puede usar --abort para descartar el merge.
     --continue
         Cuando una fusión de ramas tiene conflictos, primero hay que solucionar esos conflictos y luego continuar el proceso de fusión con este comando. Cuamdo se ejecuta este comando los conflictos deben estar solucionados ya que serán subidos al repositorio como un nuevo commit, en VS Code se abre una pestaña nueva esperando confirmar el mensaje de descripción y cerrar el archivo para terminar con la fusión y el commit automático. Al terminar la fusión Git muestra un msg indicando lo correspondiente.
