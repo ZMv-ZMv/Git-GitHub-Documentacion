@@ -618,8 +618,8 @@ branch
         Para borrar una rama. Esto aplica para repositorios locales, no en las ramas que ya están publicadas en Github. Si la eliminación fue exitosa, Git muestra un mensaje confirmando la eliminación de la rama. La rama main (o principal) no se puede eliminar, tampoco se puede borrar la rama actual, debemos estar en otra rama para poder borrarla.
         Ejemplo. Borrar la rama "version-py":
         $ git branch -d version-py
-        Esta eliminación de ramas no es definitiva, se puede recuperar la información. 
-        Cuando se usa -D funciona igual excepto que la eliminación es definitiva, no se puede recuperar nada de lo eliminado.
+        Esta eliminación de ramas no es definitiva, se puede recuperar la información.
+        Normalmente cuando se quiere borrar una rama y ésta no ha sido unida (con merge) a ninguna otra rama, Git muestra un mensaje indicando esta situación y aborta el comando en prevención de borrar una rama que contenga información importante, en este caso se usa -D que funciona igual excepto que la eliminación es forzada y definitiva, no se puede recuperar nada de lo eliminado.
 
         Para eliminar ramas en el remoto:
         git push origin --delete nombre-rama
@@ -765,6 +765,11 @@ merge
     
     <h3>Recursive merge o ort??????</h3>
     Este método se realiza normalmente cuando un merge genera conflictos en la unión de las ramas. Aquí es necesario primero resolver los conflictos y luego finalizar el merge con un commit en la rama actual. En caso que no hayan confictos igual se puede forzar este método con el flag --no-ff, Git genera automáticamente el commit de unión en la rama actual.
+
+    -m
+        Dado que merge genera un commit en la rama actual, este modo permite agregar un mensaje al commit.
+        Ejemplo. Unir la rama "hotfix1" a la rama main con el mensaje "Hotfix1 incorporado":
+        $ git merge -m "Hotfix 1 incorporado" hotfix1
 
     --ff
     --no-ff
