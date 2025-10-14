@@ -12,12 +12,15 @@
     <div>
     <p>Páginas útiles:</p>
     <ul>
-        <li><a href="https://git-scm.com/">Página oficial</a></li>
-        <li><a href="https://git-scm.com/docs">Git Reference</a></li>
-        <li><a href="https://git-scm.com/book/en/v2">Git Book</a></li>
-        <li><a href="https://git-scm.com/videos">Git Videos (oficial)</a></li>
-        <li><a href="https://git-scm.com/cheat-sheet">Git Cheat Sheet</a></li>
-        <li><a href="https://www.atlassian.com/git">Getting Git right</a></li>
+        <li><a href="https://git-scm.com/" target="_blank">Página oficial</a></li>
+        <li><a href="https://git-scm.com/docs" target="_blank">Git Reference</a></li>
+        <li><a href="https://git-scm.com/docs/user-manual" target="_blank">User Manual</a></li>
+        <li><a href="https://git-scm.com/docs/git" target="_blank">Lista completa de comandos</a></li>
+        <li><a href="https://git-scm.com/book/en/v2" target="_blank">Git Book</a></li>
+        <li><a href="https://git-scm.com/videos" target="_blank">Git Videos (oficial)</a></li>
+        <li><a href="https://git-scm.com/cheat-sheet" target="_blank">Git Cheat Sheet</a></li>
+        <li><a href="https://training.github.com/downloads/es_ES/github-git-cheat-sheet.pdf" target="_blank">HOJA DE REFERENCIA PARA GITHUB GIT</a></li>
+        <li><a href="https://www.atlassian.com/git" target="_blank">Getting Git right</a></li>
     </ul>
     </div>
 
@@ -183,6 +186,8 @@ Ejemplos de archivos y carpetas a ignorar:
     !production.log
     # ignorar los archivos terminados en .txt dentro de la carpeta doc, pero no en sus subcarpetas
     doc/*.txt
+    # ignorar todos los archivos .err en todas las carpetas
+    **/.err
     # ignorar todos los archivos terminados en .txt dentro de la carpeta doc y también en sus subcarpetas
     doc/**/*.txt
 </div>
@@ -324,7 +329,12 @@ Ejemplo. Agregar todos los archivos con la extensión txt:
 $ git add *.txt
 </div>
 
-<div><h3 class="command" id="branch"><a href="" target="_blank"></a>branch</a></h3>
+<div><h3 class="command" id="branch"><a href="https://git-scm.com/docs/git-branch" target="_blank"></a>branch</a></h3>
+
+<p>Ref.:
+    <a href="https://git-scm.com/docs/user-manual#what-is-a-branch">Understanding history: What is a branch?</a>
+</p>
+
 Para crear ramas nuevas en el repositorio o ver las que actualmente existen, borrar ramas.
 Ejemplo. Para ver (listar) las rammas que actualmente existen:
 $ git branch
@@ -332,7 +342,12 @@ La rama en la que se está trabajando (actual) tiene un * al inicio
 Ejemplo. Crear una rama con el nombre version-JavaScript:
 $ git branch version-JavaScript
 Luego será necesario cambiar el HEAD hacia esa rama para trabajar sobre ella (con el comando checkout).
-¿La rama version-JavaScript será creada sobre el último commit? ¿Qué pasa con los posibles avances o cambios que se hayan hecho luego del último commit?
+Estas nuevas ramas son creadas desde el HEAD, es decir, desde el último commit de la rama actual, pero también se puede indicar otro punto de inicio para que la nueva rama sea creada desde cualquier otro lugar en la historia del repositorio. Este punto de inicio se puede especificar como normalmente se puede especificar un commit o también puede ser un tag.
+Ejemplo. Crear una nueva rama llamada "hotfix1" desde el commit 56d3g1a:
+$ git branch hotfix1 56d3g1a
+Ejemplo. Crear una nueva rama llamada "my2.6.14" desde el tag v2.6.14
+$ git branch my2.6.14 v2.6.14
+$ git switch my2.6.14 # se va hacia la rama. También se puede hacer lo mismo en un solo paso con "checkout -b my2.6.14 v2.6.14", con el comando switch también se puede lograr.
 
 -m
     para cambiar el nombre de una rama. hay 2 formas de cambiar el nombre a una rama:
@@ -368,7 +383,7 @@ Luego será necesario cambiar el HEAD hacia esa rama para trabajar sobre ella (c
     lista las ramas en el directorio remoto
 
 -u / --set-upstream-to
-    Define la información para el repositorio remoto de una rama. Si no se especifica una rama, es a la rama actual a la que se define su remoto.
+    Define la información para el repositorio remoto de la nueva rama creada. Si no se especifica una rama, es a la rama actual a la que se define su remoto. El comando push también define esto pero para ramas ya creadas (git push pu origin rama).
 
 --unset-upstream
     Remove the upstream information for <branch-name>. If no branch is specified it defaults to the current branch.
@@ -485,7 +500,8 @@ Lo ideal es trabajar en conjunto con visual studio code para trabajar la descrip
 -m
     para escribir el mensaje del commit. Tiene que ser sí o sí una única línea, pero se puede usar múltiples -m por cada línea que se desea agregar al mensaje.
     Ejemplo. Crea un commit con la descripción de que se está agregando el archivo mi-archivo.txt:
-    $ git commit -m "Agregar archivo: mi-archivo.txt"
+    $ git commit -m "agrega el archivo: mi-archivo.txt"
+    Los mensajes de un commit deben ser concisos y precisos. Una ayuda para escribirlos adecuadamente puede ser completar el siguiente comentario "Si los cambios son aplicados al código, este commit ____" donde lo que hay que completar (los guiones bajos) sería el mensaje del commit, por ejemplo "agrega el archivo: mi-archivo.txt" en el ejemplo anterior.
 
 -a
     evita usar el comando add, lo que hace que se pueda realizar un commit sin estar mandando archivos al stage explicitamente ya que este flag lo hace automáticamente. No debería utilizarse este flag en commits complejos ya que podria incluir resultados inesperados.
@@ -519,6 +535,7 @@ core.editor
     $ git config --global core.editor "code --wait"
     --wait le dice a Git que espere hasta que el archivo se guarde, y se cierre para culminar con el commit
 alias
+    <a href="https://youtu.be/3GymExBkKjE?t=3784" target="_blank">Git - alias</a>
     para poner nombres a secuencias de comandos, algo similar a una macro. Luego para ejecutar esa macro solo hay que introducir el nombre del nuevo alias.
     Este alias se guarda en el archivo .gitconfig dentro de la carpta de usuario del sistema.
     Ejemplo 1: crear un alias de nombre 'macro'
@@ -719,6 +736,7 @@ En este caso si la rama en remoto no existe, se crea automáticamente.
     <a href="https://www.youtube.com/watch?v=l2yrJtwoC_E&t=5170s" target="_blank">Git rebase command</a>
     <a href="https://www.youtube.com/watch?v=yKMzq9VhmXo&t=6109s" target="_blank">Rebase vs Merge</a>
     <a href="https://www.datacamp.com/tutorial/git-squash-commits" target="_blank">Git Squash Commits: A Guide With Examples</a>
+    <a href="https://youtu.be/qsTthZi23VE?t=402" target="_blank">Advanced Git Tutorial - Interactive Rebase</a>
 </p>
 
 </div>
@@ -759,16 +777,18 @@ remove / rm <name>
 </div>
 
 <div><h3 class="command" id="reset"><a href="https://git-scm.com/docs/git-reset" target="_blank">reset</a></h3>
+
+<p>Ref.:
+    <a href="https://youtu.be/S7XpTAnSDL4?t=2599">Reset</a>
+    <a href="https://www.youtube.com/watch?v=s1idhUiCk38">Reset</a>
+    <a href="https://www.youtube.com/watch?v=mBYSUUnMt9M&t=5940s">Reset</a>
+</p>
+
 La versión más básica de este comando "git reset" sin opciones ni parámetros sólo tendrá efecto sobre el commit actual (HEAD), se eliminarán todos los archivos del stage, limpiándolo totalmente. Los cambios en estos archivos permanecerán como "modificados" en el directorio de trabajo, y se muestra el mensaje "Unstaged changes after reset:". Dado que el modo --mixed es por defecto, sería lo mismo utilizar "git reset --mixed".
 Otra función más utilizada de este comando es para "resetear" o mover el HEAD al commit destino que se especifique, este commit destino normalmente es un commit previo (más antiguo del inicial) en el historial de commits, aunque también se puede "adelantar" el HEAD a un commit futuro, si existe, por ejemplo, inmediatamente despúes de un reset a un commit previo, se puede hacer un reset a un commit futuro ya que estos commits aún estarán disponibles. Reset resulta entonces como regresar a commits (uno o varios, previos o futuros) actualizando el directorio de trabajo a ese punto para continuar trabajando desde ahí. Los commits que existan entre la posición inicial y destino serán descartados, parecerán ser "eliminados" aunque realmente no lo son, y la información de ellos puede o no permanecer dependiendo de los modos que se designen con el comando. Se tiene 3 modos que son los que más se usan y definen el estado final de la información de los commits "eliminados" respecto a las áreas del repositorio:
     - el historial de commits
     - el directorio de trabajo
     - el área de preparación (stage)    
-
-Ref.: 
-https://www.youtube.com/watch?v=s1idhUiCk38
-https://www.youtube.com/watch?v=mBYSUUnMt9M&t=5940s
-
 
 --soft [commit destino]
     La información de los commits "eliminados" queda de la siguiente manera:
@@ -787,7 +807,7 @@ https://www.youtube.com/watch?v=mBYSUUnMt9M&t=5940s
     Si no se especifica commit destino funciona como la versión básica "git reset", el efecto aplica sólo al commit actual (HEAD), se eliminarán todos los archivos del stage, limpiándolo totalmente. Los cambios en estos archivos permanecerán como "modificados" en el directorio de trabajo.
     
 --hard [commit destino]
-    En este modo, el stage es vaciado y en el directorio de trabajo todos los cambios en los archivos modificados son descartados. El directorio de trabajo se actualiza al commit destino. Tener en cuenta que esta acción es irrevocable y no hay forma de recuperar la información eliminada. Si no se especifica commit destino el efecto aplica sólo al commit actual (HEAD), eliminando todos los cambios y dejando el directorio de trabajo como si recién se hubiera comiteado.
+    En este modo, el stage es vaciado y en el directorio de trabajo todos los cambios en los archivos modificados son descartados. El directorio de trabajo se actualiza al commit destino. Si no se especifica commit destino el efecto aplica sólo al commit actual (HEAD), eliminando todos los cambios y dejando el directorio de trabajo como si recién se hubiera comiteado. Tener en cuenta que esta acción es peligrosa ya que podríamos perder información. Una posible forma de recuperar esta información es utilizar --hard indicando un hash de un commit eliminado tan pronto se desee recuperar estos commits.
 
 <table>
     <thead><tr><th>Modo</th><th>Efecto</th><th>Un caso de uso</th></tr></thead>
@@ -875,7 +895,11 @@ $ git restore --source=HEAD --staged --worktree file.txt
 </div>
 
 <div><h3 class="command" id="revert"><a href="" target="_blank"></a>revert</a></h3>
-Ref.: https://www.youtube.com/watch?v=yKMzq9VhmXo&t=6670s
+<p>Ref.:
+    <a href="https://youtu.be/S7XpTAnSDL4?t=3016">Revert</a>
+    <a href="https://www.youtube.com/watch?v=yKMzq9VhmXo&t=6670s">Revert</a>
+</p>
+
 Crea un nuevo commit que contiene el estado de un commit previo al actual sin borrar el actual. Aunque este nuevo commit contiene el mismo estado de los archivos que el commit al que se está refiriendo, no es el mismo, ya que incluso tiene otro hash.
 revert es por tanto, un comando que ofrece un camino más seguro a la hora de 'deshacer' cambios comparado con el comando reset por ejemplo, ya que no cambia el historial de commits que ya hayan sido subidos al repositorio.
 Para ejecutar este comando hay que agregarle el hash del commit al cual se quiere igualar el estado, una vez ejecutado, pedirá un mensaje como si se estuviera haciendo un commit común.
@@ -894,6 +918,7 @@ $ git revert 17a5135
 <div><h3 class="command" id=""><a href="" target="_blank"></a>stash</a></h3>
 <p>Ref.:
     <a href="https://youtu.be/zTjRZNkhiEU?t=7294">Learn Git – Full Course for Beginners / Git Diff and stashing</a>
+    <a href="https://youtu.be/S7XpTAnSDL4?t=3174">Stash</a>
 </p>
 almacena temporalmente los cambios realizados, es decir, el estado actual del directorio de trabajo y del stage, y restaura el directorio de trabajo al commit HEAD (el último commit en la rama), si luego se ejecuta status, informará de que no hay cambios en el area de trabajo. stash saca los cambios del área de trabajo y del stage y guarda temporalmente el estado de los archivos sin hacer commits. 
 stash es últil en situaciones en que se está trabajando en una rama digamos 'rama-trabajo' se ha avanzado cambios ahí y se desea cambiar temporalmente a otra rama, a main por ejemplo, para hacer algo rápido o pequeño, terminar eso y regresar a la rama 'rama-trabajo' para seguir trabajando donde se dejo el avance, sin hacer ningún commit en 'rama-trabajo' durante todo este proceso. También es útil cuando se necesita aplicar el mismo avance o cambios a múltiples ramas usando el modo apply.
@@ -902,6 +927,7 @@ Por defecto, Git no guarda en el stash los cambios hechos en archivos que no se 
 Ejemplo. Poner los archivos de stage al stash:
 $ git stash
 esto crea un stash con los archivos. Git muestra un mensaje confirmando la creación del stash
+Notar que su puede crear un stash sobre una rama, trabajar en ella y luego traer lo guardado todo sobre la misma rama, es posible que bajo esta situación existan conflictos a solucionar a la hora de traer el stash pero esta situación es perfectamente válida.
 
 -m / save
     permite incluir un mensaje con el stash. Esto es muy útil ya que en lugar de que git genere un hash aleatorio para identificar el stash creado, es éste mensaje el identificador, permitiendo un trabajo más fácil cuando se tienen múltiples stash.
@@ -1068,6 +1094,18 @@ Elimina tags los existentes que se indiquen.
 -i / --ignore-case
 Sorting and filtering tags are case insensitive.
 
+</div>
+
+<div><h3><a href="" target="_blank">worktree</a></h3>
+<p>
+<a href="https://www.youtube.com/watch?v=UxKY3b7ImOc" target="_blank">S01E04 Git Worktrees: Vida más allá de nuestro área de trabajo</a>
+<a href="https://www.youtube.com/watch?v=OM--G11e9gg" target="_blank">Tech Tuesday - Git Worktrees</a>
+<a href="https://www.youtube.com/watch?v=8ezj3Rh72Xw" target="_blank">How to use Git Worktree</a>
+<a href="https://www.youtube.com/watch?v=NIy7w1FIRD0" target="_blank">Git Worktree - level up your productivity!</a>
+<a href="https://www.youtube.com/watch?v=grAsFn5yvjA" target="_blank">Git Tutorial #24: What Is Git Worktree and How to Use It | Learn Git with GitKraken
+</a>
+<a href="https://www.youtube.com/watch?v=x1mjUh6-azc" target="_blank">VS Code finally supports Git Worktrees</a>
+</p>
 </div>
 
 </div>
